@@ -4,9 +4,9 @@ package artopia.services.command;
  * @author Rottenwood
  */
 public class CommandResult {
-    String commandName;
+    public String command;
 
     public CommandResult(String command) {
-        this.commandName = command;
+        this.command = command;
     }
 }
