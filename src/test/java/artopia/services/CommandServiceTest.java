@@ -9,7 +9,12 @@ import org.junit.Test;
 public class CommandServiceTest extends Assert {
 
     @Test
-    public void execute_givenHelpCommand_callHelpCommandAndReturnResult() {
+    public void execute_givenHelpCommandInLowercase_callHelpCommandAndReturnResult() {
+        CommandService commandService = new CommandService();
 
+        String command = "help";
+        String commandResult = commandService.execute(command);
+
+        assertEquals(commandResult, command);
     }
 }

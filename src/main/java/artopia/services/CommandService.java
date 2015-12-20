@@ -5,4 +5,7 @@ package artopia.services;
  */
 public class CommandService {
 
+    public String execute(String help) {
+        return help;
+    }
 }
