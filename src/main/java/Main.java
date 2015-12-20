@@ -1,6 +1,4 @@
-package rottenwood.artopia;
-
-import rottenwood.artopia.runner.ConnectionHandler;
+import artopia.handlers.ConnectionHandler;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,18 +8,19 @@ import java.net.Socket;
  */
 public class Main {
     public static void main(String[] args) {
-        int port = 7777;
+        int port = 9000;
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
 
-            System.out.printf("Server is started on port %s ...%n", port);
+            System.out.printf("Сервер запущен на порту %s ...%n", port);
 
             while (true) {
                 Socket socket = serverSocket.accept();
 
                 Runnable connectionHandler = new ConnectionHandler(socket);
                 new Thread(connectionHandler).start();
+
             }
         } catch (Exception exception) {
             exception.printStackTrace();
