@@ -29,6 +29,7 @@ public class CommandServiceTest extends Assert {
         String command = "help";
         CommandResult commandResult = commandService.execute(command);
 
+        assertFalse(commandResult.haveErrors());
         assertEquals(commandResult.command, command);
     }
 }

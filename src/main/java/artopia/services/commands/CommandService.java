@@ -10,8 +10,14 @@ public class CommandService {
     public CommandResult execute(String command) {
         CommandResult commandResult = new CommandResult(command);
 
+        String commandClassName = command.toLowerCase();
+        commandClassName = "artopia.commands."
+                + Character.toString(commandClassName.charAt(0)).toUpperCase()
+                + commandClassName.substring(1)
+                + "Command";
+
         try {
-            Class.forName(command);
+            Class.forName(commandClassName);
         } catch (ClassNotFoundException exception) {
             commandResult.addError(new CommandNotFound());
         }
