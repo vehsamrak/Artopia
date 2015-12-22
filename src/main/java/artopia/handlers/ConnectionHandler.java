@@ -1,9 +1,9 @@
 package artopia.handlers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import artopia.models.User;
+import artopia.services.UserService;
+
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -11,29 +11,45 @@ import java.net.Socket;
  */
 public class ConnectionHandler implements Runnable {
     private final Socket socket;
+    private BufferedReader socketInput;
+    private User user;
 
     public ConnectionHandler(Socket socket) {
         this.socket = socket;
+
+        try {
+            InputStreamReader in = new InputStreamReader(this.socket.getInputStream());
+            this.socketInput = new BufferedReader(in);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void run() {
         System.out.printf("[*] Новое подключение! (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
 
-        BufferedReader socketInput = null;
         try {
-            socketInput = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             PrintWriter socketOutput = new PrintWriter(this.socket.getOutputStream(), true);
 
-            String command = null;
 
             socketOutput.println("Добро пожаловать в JavaMud!");
+            socketOutput.println("Введите ваше имя: ");
+            String username = this.socketInput.readLine();
 
+            socketOutput.println("Введите пароль: ");
+            String password = this.socketInput.readLine();
+
+            this.user = UserService.login(username, password);
+
+            socketOutput.printf("Добро пожаловать, %s!%n", this.user.username);
+
+            String command = null;
             while (true) {
-                command = socketInput.readLine();
-
-                socketOutput.println("Привет!");
-                socketOutput.printf("Введена команда \"%s\".%n", command);
+                socketOutput.println("Введите команду:");
+                command = this.socketInput.readLine();
+                socketOutput.printf("Вы ввели команду \"%s\".%n", command);
             }
         } catch (IOException e) {
             e.printStackTrace();
