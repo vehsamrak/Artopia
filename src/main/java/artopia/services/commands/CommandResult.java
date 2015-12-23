@@ -10,6 +10,12 @@ import java.util.ArrayList;
 public class CommandResult {
     public String command;
     private ArrayList<AbstractCommandError> errors = new ArrayList<>();
+    private String result;
+
+    public CommandResult(String command, String result) {
+        this.command = command;
+        this.result = result;
+    }
 
     public CommandResult(String command) {
         this.command = command;
@@ -25,5 +31,13 @@ public class CommandResult {
 
     public boolean haveErrors() {
         return !this.errors.isEmpty();
+    }
+
+    public String toString() {
+        return this.result;
+    }
+
+    public String getCommandName() {
+        return command;
     }
 }

@@ -2,8 +2,13 @@ package artopia.handlers;
 
 import artopia.models.User;
 import artopia.services.UserService;
+import artopia.services.commands.CommandResult;
+import artopia.services.commands.CommandService;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -44,11 +49,15 @@ public class ConnectionHandler implements Runnable {
 
             socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
 
+            CommandService commandService = new CommandService(user);
+
             String command = null;
             while (true) {
                 socketOutput.println("Введите команду:");
                 command = this.socketInput.readLine();
-                socketOutput.printf("Вы ввели команду \"%s\".%n", command);
+                CommandResult commandResult = commandService.execute(command);
+//                socketOutput.printf("Вы ввели команду \"%s\".%n", command);
+                socketOutput.println(commandResult.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();

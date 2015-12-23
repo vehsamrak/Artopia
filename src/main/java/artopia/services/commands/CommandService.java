@@ -5,7 +5,7 @@ import artopia.handlers.ExceptionHandler;
 import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandNotFound;
-import artopia.services.commands.errors.Internal;
+import artopia.services.commands.errors.InternalError;
 
 /**
  * @author Rottenwood
@@ -37,7 +37,7 @@ public class CommandService {
             } else {
                 ExceptionHandler.handle(exception);
 
-                commandResult = this.createCommandResultWithError(command, new Internal());
+                commandResult = this.createCommandResultWithError(command, new InternalError());
             }
         }
 

@@ -33,6 +33,6 @@ public class CommandServiceTest extends Assert {
         CommandResult commandResult = commandService.execute(command);
 
         assertFalse(commandResult.haveErrors());
-        assertEquals(commandResult.command, command);
+        assertEquals(commandResult.getCommandName(), command);
     }
 }

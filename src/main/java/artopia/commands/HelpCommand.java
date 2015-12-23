@@ -13,6 +13,12 @@ public class HelpCommand extends AbstractCommand {
     @Override
     public CommandResult execute(User user) {
         this.user = user;
-        return new CommandResult(this.commandName);
+
+        String commandResult = "" +
+                "Доступные команды:\n" +
+                "help - игровая инфорация\n" +
+                "look - посмотреть вокруг\n";
+
+        return new CommandResult(this.commandName, commandResult);
     }
 }
