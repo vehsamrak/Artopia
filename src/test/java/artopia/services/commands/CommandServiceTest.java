@@ -1,5 +1,6 @@
 package artopia.services.commands;
 
+import artopia.models.User;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class CommandServiceTest extends Assert {
 
     @Test
     public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError() {
-        CommandService commandService = new CommandService();
+        CommandService commandService = new CommandService(this.createUser());
 
         String command = "unexistingCommandForTest";
         CommandResult commandResult = commandService.execute(command);
@@ -20,9 +21,13 @@ public class CommandServiceTest extends Assert {
         assertEquals(CommandNotFound.class, commandResult.getErrors().get(0).getClass());
     }
 
+    private User createUser() {
+        return new User("tester", "password");
+    }
+
     @Test
     public void execute_givenHelpCommand_returnCommandResultWithEqualCommandName() {
-        CommandService commandService = new CommandService();
+        CommandService commandService = new CommandService(this.createUser());
 
         String command = "help";
         CommandResult commandResult = commandService.execute(command);

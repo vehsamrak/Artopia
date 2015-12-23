@@ -1,18 +1,21 @@
 package artopia.commands;
 
-import artopia.services.commands.CommandResult;
+import artopia.models.User;
 
 /**
  * @author Rottenwood
  */
-public class AbstractCommand {
-    public final String command;
+public abstract class AbstractCommand implements Commandable {
+    private User user;
+    private String commandName;
 
-    public AbstractCommand(String command) {
-        this.command = command;
+    @Override
+    public User getUser() {
+        return this.user;
     }
 
-    public CommandResult execute() {
-        return new CommandResult(this.command);
+    @Override
+    public String getCommandName() {
+        return commandName;
     }
 }

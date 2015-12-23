@@ -2,6 +2,7 @@ package artopia.services.commands;
 
 import artopia.commands.AbstractCommand;
 import artopia.handlers.ExceptionHandler;
+import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandNotFound;
 import artopia.services.commands.errors.Internal;
@@ -10,6 +11,12 @@ import artopia.services.commands.errors.Internal;
  * @author Rottenwood
  */
 public class CommandService {
+
+    private final User user;
+
+    public CommandService(User user) {
+        this.user = user;
+    }
 
     public CommandResult execute(String command) {
         CommandResult commandResult;
@@ -20,17 +27,17 @@ public class CommandService {
                 + "Command";
 
         try {
-            AbstractCommand commandObject = (AbstractCommand) Class.forName(commandClassName).getConstructor(String.class).newInstance(command);
+            AbstractCommand commandObject = (AbstractCommand) Class.forName(commandClassName).newInstance();
 
-            commandResult = commandObject.execute();
+            commandResult = commandObject.execute(this.user);
 
         } catch (Exception exception) {
             if (exception instanceof ClassNotFoundException) {
-                commandResult = createCommandResultWithError(command, new CommandNotFound());
+                commandResult = this.createCommandResultWithError(command, new CommandNotFound());
             } else {
                 ExceptionHandler.handle(exception);
 
-                commandResult = createCommandResultWithError(command, new Internal());
+                commandResult = this.createCommandResultWithError(command, new Internal());
             }
         }
 
