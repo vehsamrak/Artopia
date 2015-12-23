@@ -20,7 +20,7 @@ public class HelpCommandTest extends Assert {
 
         String helpCommandResultString = "" +
                 "Доступные команды:\n" +
-                "help - игровая инфорация\n" +
+                "help - игровая информация\n" +
                 "look - посмотреть вокруг\n";
 
         assertFalse(commandResult.haveErrors());
