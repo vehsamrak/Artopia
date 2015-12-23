@@ -56,8 +56,7 @@ public class ConnectionHandler implements Runnable {
                 socketOutput.println("Введите команду:");
                 command = this.socketInput.readLine();
                 CommandResult commandResult = commandService.execute(command);
-//                socketOutput.printf("Вы ввели команду \"%s\".%n", command);
-                socketOutput.println(commandResult.toString());
+                socketOutput.printf("%s%n%n", commandResult.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
