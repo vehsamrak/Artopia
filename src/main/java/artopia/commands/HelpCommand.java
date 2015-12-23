@@ -8,12 +8,9 @@ import artopia.services.commands.CommandResult;
  */
 public class HelpCommand extends AbstractCommand {
     private final String commandName = "help";
-    private User user;
 
     @Override
     public CommandResult execute(User user) {
-        this.user = user;
-
         String commandResult = "" +
                 "Доступные команды:\n" +
                 "help - игровая инфорация\n" +
