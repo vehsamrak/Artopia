@@ -4,7 +4,7 @@ package artopia.models;
  * @author Rottenwood
  */
 public class User {
-    public final String username;
+    private final String username;
     private boolean isAuthenticated = false;
 
     // TODO: 22.12.15 Обработка пароля
@@ -21,5 +21,9 @@ public class User {
 
     public void authenticate() {
         isAuthenticated = true;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

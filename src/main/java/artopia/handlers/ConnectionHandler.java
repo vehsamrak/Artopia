@@ -12,7 +12,6 @@ import java.net.Socket;
 public class ConnectionHandler implements Runnable {
     private final Socket socket;
     private BufferedReader socketInput;
-    private User user;
 
     public ConnectionHandler(Socket socket) {
         this.socket = socket;
@@ -41,9 +40,9 @@ public class ConnectionHandler implements Runnable {
             socketOutput.println("Введите пароль: ");
             String password = this.socketInput.readLine();
 
-            this.user = UserService.login(username, password);
+            User user = UserService.login(username, password);
 
-            socketOutput.printf("Добро пожаловать, %s!%n", this.user.username);
+            socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
 
             String command = null;
             while (true) {

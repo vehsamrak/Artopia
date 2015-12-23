@@ -11,8 +11,10 @@ public class UserServiceTest extends Assert {
 
     @Test
     public void login_usernameAndPassword_returnsAuthenticatedUser() {
-        User user = UserService.login("tester", "password");
+        String username = "tester";
+        User user = UserService.login(username, "password");
 
         assertTrue(user.isAuthenticated());
+        assertEquals(username, user.getUsername());
     }
 }
