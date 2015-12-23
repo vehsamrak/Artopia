@@ -1,7 +1,5 @@
-package artopia.services;
+package artopia.services.commands;
 
-import artopia.services.commands.CommandResult;
-import artopia.services.commands.CommandService;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;
 import org.junit.Test;
