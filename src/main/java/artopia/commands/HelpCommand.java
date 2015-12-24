@@ -7,7 +7,6 @@ import artopia.services.commands.CommandResult;
  * @author Rottenwood
  */
 public class HelpCommand extends AbstractCommand {
-    private final String commandName = "help";
 
     @Override
     public CommandResult execute(User user) {
@@ -16,6 +15,6 @@ public class HelpCommand extends AbstractCommand {
                 "help - игровая информация\n" +
                 "look - посмотреть вокруг";
 
-        return new CommandResult(this.commandName, commandResult);
+        return new CommandResult("help", commandResult);
     }
 }
