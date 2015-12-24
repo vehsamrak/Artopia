@@ -1,5 +1,7 @@
 package artopia.services.commands;
 
+import artopia.exceptions.EmptyPassword;
+import artopia.exceptions.EmptyUsername;
 import artopia.models.User;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;
@@ -22,7 +24,12 @@ public class CommandServiceTest extends Assert {
     }
 
     private User createUser() {
-        return new User("tester", "password");
+        try {
+            return new User("tester", "password");
+        } catch (EmptyUsername | EmptyPassword exception) {
+            exception.printStackTrace();
+            return null;
+        }
     }
 
     @Test

@@ -1,5 +1,7 @@
 package artopia.handlers;
 
+import artopia.exceptions.EmptyPassword;
+import artopia.exceptions.EmptyUsername;
 import artopia.models.User;
 import artopia.services.UserService;
 import artopia.services.commands.CommandResult;
@@ -32,7 +34,7 @@ public class ConnectionHandler implements Runnable {
 
     @Override
     public void run() {
-        System.out.printf("[*] Новое подключение! (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
+        System.out.printf("[>] Новое подключение! (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
 
         try {
             PrintWriter socketOutput = new PrintWriter(this.socket.getOutputStream(), true);
@@ -45,19 +47,35 @@ public class ConnectionHandler implements Runnable {
             socketOutput.println("Введите пароль: ");
             String password = this.socketInput.readLine();
 
-            User user = UserService.login(username, password);
+            try {
+                User user = UserService.login(username, password);
 
-            socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
+                socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
 
-            CommandService commandService = new CommandService(user);
+                CommandService commandService = new CommandService(user);
 
-            String command = null;
-            while (true) {
-                socketOutput.println("Введите команду:");
-                command = this.socketInput.readLine();
-                CommandResult commandResult = commandService.execute(command);
-                socketOutput.printf("%s%n%n", commandResult.toString());
+                while (true) {
+                    socketOutput.println("Введите команду:");
+                    String command = this.socketInput.readLine();
+
+                    CommandResult commandResult = commandService.execute(command);
+                    socketOutput.printf("%s%n%n", commandResult.toString());
+                }
+            } catch (EmptyPassword | EmptyUsername exception) {
+                socketOutput.println("Логин и пароль не могут быть пустыми!");
+                this.disconnect();
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            this.disconnect();
+        }
+    }
+
+    public void disconnect() {
+        try {
+            this.socket.close();
+            System.out.printf("[<] Клиент отключен. (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
         } catch (IOException e) {
             e.printStackTrace();
         }
