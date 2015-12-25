@@ -5,6 +5,7 @@ import artopia.handlers.ExceptionHandler;
 import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandNotFound;
+import artopia.services.commands.errors.EmptyCommand;
 import artopia.services.commands.errors.InternalError;
 
 /**
@@ -20,6 +21,13 @@ public class CommandService {
 
     public CommandResult execute(String command) {
         CommandResult commandResult;
+
+        if (command.length() == 0) {
+            commandResult = this.createCommandResultWithError(command, new EmptyCommand());
+
+            return commandResult;
+        }
+
         String commandInLowercase = command.toLowerCase();
         String commandClassName = "artopia.commands."
                 + Character.toString(commandInLowercase.charAt(0)).toUpperCase()
