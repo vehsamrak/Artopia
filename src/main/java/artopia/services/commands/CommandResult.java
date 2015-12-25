@@ -82,4 +82,8 @@ public class CommandResult {
     public String getCommandName() {
         return command;
     }
+
+    public ArrayList<AbstractCommandError> getErrors() {
+        return errors;
+    }
 }
