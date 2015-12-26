@@ -39,7 +39,6 @@ public class ConnectionHandler implements Runnable {
         try {
             PrintWriter socketOutput = new PrintWriter(this.socket.getOutputStream(), true);
 
-
             socketOutput.println("Добро пожаловать в JavaMud!");
             socketOutput.println("Введите ваше имя: ");
             String username = this.socketInput.readLine();

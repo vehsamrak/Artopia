@@ -7,11 +7,13 @@ import artopia.models.User;
 /**
  * @author Rottenwood
  */
-public class UserService {
-
+public class UserService
+{
     public static User login(String username, String password) throws EmptyPassword, EmptyUsername {
         User user = new User(username, password);
         user.authenticate();
+
+        System.out.printf("[+] %s зашел в игру.", user.getUsername());
 
         return user;
     }
