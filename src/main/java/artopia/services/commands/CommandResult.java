@@ -11,6 +11,7 @@ public class CommandResult {
     public String command;
     private ArrayList<AbstractCommandError> errors = new ArrayList<>();
     private String result;
+    private ArrayList<String> subCommands = new ArrayList<>();
 
     /**
      * Команда с результатом
@@ -80,10 +81,22 @@ public class CommandResult {
      * @return Имя команды
      */
     public String getCommandName() {
-        return command;
+        return this.command;
     }
 
     public ArrayList<AbstractCommandError> getErrors() {
-        return errors;
+        return this.errors;
+    }
+
+    public boolean haveSubCommands() {
+        return !this.subCommands.isEmpty();
+    }
+
+    public ArrayList<String> getSubCommands() {
+        return this.subCommands;
+    }
+
+    public void addSubCommand(String subCommand) {
+        this.subCommands.add(subCommand);
     }
 }

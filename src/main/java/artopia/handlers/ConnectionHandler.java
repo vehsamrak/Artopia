@@ -59,6 +59,11 @@ public class ConnectionHandler implements Runnable {
 
                     CommandResult commandResult = commandService.execute(command);
                     socketOutput.printf("%s%n%n", commandResult.toString());
+
+                    if (commandResult.haveSubCommands() && commandResult.getSubCommands().contains("exit")) {
+                        this.disconnect();
+                        return;
+                    }
                 }
             } catch (EmptyPassword | EmptyUsername exception) {
                 socketOutput.println("Логин и пароль не могут быть пустыми!");

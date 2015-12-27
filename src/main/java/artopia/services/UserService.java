@@ -13,7 +13,7 @@ public class UserService
         User user = new User(username, password);
         user.authenticate();
 
-        System.out.printf("[+] %s зашел в игру.", user.getUsername());
+        System.out.printf("[+] %s зашел в игру.%n", user.getUsername());
 
         return user;
     }
