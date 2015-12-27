@@ -31,7 +31,8 @@ public class HelpCommandTest extends Assert {
         String helpCommandResultString = "" +
                 "Доступные команды:\n" +
                 "help - игровая информация\n" +
-                "look - посмотреть вокруг";
+                "look - посмотреть вокруг\n" +
+                "exit - выход из игры";
 
         assertFalse(commandResult.haveErrors());
         assertEquals(commandResult.getCommandName(), command);
