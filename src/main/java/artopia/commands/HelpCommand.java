@@ -13,7 +13,8 @@ public class HelpCommand extends AbstractCommand {
         String commandResult = "" +
                 "Доступные команды:\n" +
                 "help - игровая информация\n" +
-                "look - посмотреть вокруг";
+                "look - посмотреть вокруг\n" +
+                "exit - выход из игры";
 
         return new CommandResult("help", commandResult);
     }
