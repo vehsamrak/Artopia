@@ -8,7 +8,8 @@ import java.util.Objects;
 /**
  * @author Rottenwood
  */
-public class User {
+public class User
+{
     private final String username;
     private boolean isAuthenticated = false;
 
