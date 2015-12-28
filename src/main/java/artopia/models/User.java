@@ -3,15 +3,27 @@ package artopia.models;
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * @author Rottenwood
  */
+@Entity
+@Table(name = "users")
 public class User
 {
-    private final String username;
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Transient
     private boolean isAuthenticated = false;
+
+    public User() {}
 
     // TODO: 22.12.15 Обработка пароля
     public User(String username, String password) throws EmptyUsername, EmptyPassword {
@@ -27,6 +39,7 @@ public class User
         this.username = username.toLowerCase();
     }
 
+
     public boolean isAuthenticated() {
         return isAuthenticated;
     }
@@ -37,5 +50,9 @@ public class User
 
     public String getUsername() {
         return username;
+    }
+
+    public long getId() {
+        return id;
     }
 }
