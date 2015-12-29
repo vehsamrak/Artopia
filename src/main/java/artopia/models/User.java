@@ -20,6 +20,9 @@ public class User
     @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
+    private String password;
+
     @Transient
     private boolean isAuthenticated = false;
 
@@ -36,7 +39,8 @@ public class User
         String usernameInLowercase = username.toLowerCase();
         username = Character.toString(usernameInLowercase.charAt(0)).toUpperCase() + usernameInLowercase.substring(1);
 
-        this.username = username.toLowerCase();
+        this.username = username;
+        this.password = password;
     }
 
 
@@ -54,5 +58,9 @@ public class User
 
     public long getId() {
         return id;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
