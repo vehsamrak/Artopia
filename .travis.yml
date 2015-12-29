@@ -4,5 +4,7 @@ jdk:
   - oraclejdk8
   - oraclejdk7
 
+install: ~
+
 script:
   - gradle test -i
