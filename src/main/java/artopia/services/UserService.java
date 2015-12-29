@@ -12,8 +12,14 @@ import org.hibernate.Transaction;
  */
 public class UserService
 {
-    public static User login(String username, String password) throws EmptyPassword, EmptyUsername {
-        Session session = DatabaseService.getSession();
+    private DatabaseService databaseService;
+
+    public UserService(DatabaseService databaseService) {
+        this.databaseService = databaseService;
+    }
+
+    public User login(String username, String password) throws EmptyPassword, EmptyUsername {
+        Session session = this.databaseService.getSession();
 
         Query query = session.createQuery("FROM User WHERE username=:username");
         query.setParameter("username", username);

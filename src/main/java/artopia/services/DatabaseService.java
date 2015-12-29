@@ -12,10 +12,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  */
 public class DatabaseService
 {
-    private static Session session = null;
-    private static SessionFactory sessionFactory = null;
+    private Session session = null;
+    private SessionFactory sessionFactory = null;
 
-    private static SessionFactory createSessionFactory() {
+    private SessionFactory createSessionFactory() {
         // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
@@ -28,27 +28,27 @@ public class DatabaseService
         }
     }
 
-    private static Session openSession() {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory();
+    private Session openSession() {
+        if (this.sessionFactory == null) {
+            this.sessionFactory = createSessionFactory();
         }
 
-        return sessionFactory.openSession();
+        return this.sessionFactory.openSession();
     }
 
-    public static void close() {
-        session.close();
+    public void close() {
+        this.session.close();
     }
 
-    public static Session getSession() throws SessionException {
-        if (session == null) {
-            session = openSession();
+    public Session getSession() throws SessionException {
+        if (this.session == null) {
+            this.session = openSession();
         }
 
-        if (session == null) {
+        if (this.session == null) {
             throw new SessionException("Session was not opened.");
         }
 
-        return session;
+        return this.session;
     }
 }
