@@ -14,8 +14,6 @@ public class Main {
 
         System.out.println("Запуск сессии для работы с базой данных ...");
 
-        DatabaseService databaseService = new DatabaseService();
-        databaseService.openSession();
         UserService userService = new UserService(new DatabaseService());
 
         try {

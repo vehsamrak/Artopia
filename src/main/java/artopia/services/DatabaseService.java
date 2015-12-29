@@ -11,9 +11,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  * @author Vehsamrak
  */
 public class DatabaseService
+
 {
     private Session session = null;
     private SessionFactory sessionFactory = null;
+
+    public DatabaseService() {
+        this.openSession();
+    }
 
     private SessionFactory createSessionFactory() {
         // A SessionFactory is set up once for an application!
