@@ -2,6 +2,7 @@ package artopia.handlers;
 
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
+import artopia.exceptions.WrongPassword;
 import artopia.models.User;
 import artopia.services.UserService;
 import artopia.services.commands.CommandResult;
@@ -69,6 +70,9 @@ public class ConnectionHandler implements Runnable {
                 }
             } catch (EmptyPassword | EmptyUsername exception) {
                 socketOutput.println("Логин и пароль не могут быть пустыми!");
+                this.disconnect();
+            } catch (WrongPassword exception) {
+                socketOutput.println("Неверный пароль!");
                 this.disconnect();
             }
 

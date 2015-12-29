@@ -2,6 +2,7 @@ package artopia.services;
 
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
+import artopia.exceptions.WrongPassword;
 import artopia.models.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,18 +17,15 @@ import static org.mockito.Mockito.*;
 public class UserServiceTest extends Assert
 {
 
-    public static final String USERNAME = "tester";
-
     @Test
     public void login_givenUserServiceWithExistingUser_returnsAuthenticatedUser() {
 
         UserService userService = this.createUserServiceWithUserTester();
 
         try {
-            User user = userService.login(USERNAME, "password");
+            User user = userService.login("tester", "password");
             assertTrue(user.isAuthenticated());
-            assertEquals(USERNAME, user.getUsername());
-        } catch (EmptyPassword | EmptyUsername exception) {
+        } catch (EmptyPassword | EmptyUsername | WrongPassword exception) {
             exception.printStackTrace();
             assertTrue(false);
         }
@@ -49,19 +47,22 @@ public class UserServiceTest extends Assert
     private Session createSession(Query mockedQuery) {
         Session mockedSession = mock(Session.class);
         when(mockedSession.createQuery(anyString())).thenReturn(mockedQuery);
+
         return mockedSession;
     }
 
     private Query createQuery(User mockedUser) {
         Query mockedQuery = mock(Query.class);
         when(mockedQuery.uniqueResult()).thenReturn(mockedUser);
+
         return mockedQuery;
     }
 
     private User createUser() {
-        User mockedUser = mock(User.class);
+        User mockedUser = spy(User.class);
         when(mockedUser.isAuthenticated()).thenReturn(true);
-        when(mockedUser.getUsername()).thenReturn(USERNAME);
+        when(mockedUser.getPassword()).thenReturn("password");
+
         return mockedUser;
     }
 }
