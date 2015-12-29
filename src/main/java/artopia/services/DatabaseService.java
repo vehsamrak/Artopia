@@ -28,7 +28,7 @@ public class DatabaseService
         }
     }
 
-    private Session openSession() {
+    public Session openSession() {
         if (this.sessionFactory == null) {
             this.sessionFactory = createSessionFactory();
         }

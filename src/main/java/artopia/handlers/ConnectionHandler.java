@@ -3,7 +3,6 @@ package artopia.handlers;
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 import artopia.models.User;
-import artopia.services.DatabaseService;
 import artopia.services.UserService;
 import artopia.services.commands.CommandResult;
 import artopia.services.commands.CommandService;
@@ -19,10 +18,12 @@ import java.net.Socket;
  */
 public class ConnectionHandler implements Runnable {
     private final Socket socket;
+    private UserService userService;
     private BufferedReader socketInput;
 
-    public ConnectionHandler(Socket socket) {
+    public ConnectionHandler(Socket socket, UserService userService) {
         this.socket = socket;
+        this.userService = userService;
 
         try {
             InputStreamReader in = new InputStreamReader(this.socket.getInputStream());
@@ -47,10 +48,8 @@ public class ConnectionHandler implements Runnable {
             socketOutput.println("Введите пароль: ");
             String password = this.socketInput.readLine();
 
-            UserService userService = new UserService(new DatabaseService());
-
             try {
-                User user = userService.login(username, password);
+                User user = this.userService.login(username, password);
 
                 socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
 
