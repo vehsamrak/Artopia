@@ -4,7 +4,6 @@ import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * @author Rottenwood
@@ -30,9 +29,9 @@ public class User
 
     // TODO: 22.12.15 Обработка пароля
     public User(String username, String password) throws EmptyUsername, EmptyPassword {
-        if (Objects.equals(username, "")) {
+        if (username.equals("")) {
             throw new EmptyUsername();
-        } else if (Objects.equals(password, "")) {
+        } else if (password.equals("")) {
             throw new EmptyPassword();
         }
 
