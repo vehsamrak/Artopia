@@ -8,4 +8,4 @@ install:
   - date
 
 script:
-  - gradle test -i
+  - gradle test
