@@ -6,12 +6,30 @@ import artopia.services.commands.CommandResult;
 /**
  * @author Rottenwood
  */
-public class LookCommand extends AbstractCommand {
+public class LookCommand extends AbstractCommand
+{
+
+    private User user;
+    private String commandName = "look";
 
     @Override
-    public CommandResult execute(User user) {
+    public CommandResult execute(User user)
+    {
+        this.user = user;
         String commandResult = "Ты осмотрелся.";
 
-        return new CommandResult("look", commandResult);
+        return new CommandResult(this.commandName, commandResult);
+    }
+
+    @Override
+    public User getUser()
+    {
+        return this.user;
+    }
+
+    @Override
+    public String getCommandName()
+    {
+        return this.commandName;
     }
 }
