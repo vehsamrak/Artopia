@@ -1,4 +1,4 @@
-package artopia.commands;
+package artopia.commands.infrastructure;
 
 import artopia.models.User;
 import artopia.services.commands.CommandResult;

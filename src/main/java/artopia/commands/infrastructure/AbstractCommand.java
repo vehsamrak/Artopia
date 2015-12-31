@@ -1,4 +1,4 @@
-package artopia.commands;
+package artopia.commands.infrastructure;
 
 /**
  * @author Rottenwood

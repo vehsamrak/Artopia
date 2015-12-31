@@ -1,12 +1,14 @@
 package artopia.commands;
 
+import artopia.commands.infrastructure.AbstractCommand;
 import artopia.models.User;
 import artopia.services.commands.CommandResult;
 
 /**
  * @author Rottenwood
  */
-public class HelpCommand extends AbstractCommand {
+public class HelpCommand extends AbstractCommand
+{
 
     private User user;
     private String commandName = "help";

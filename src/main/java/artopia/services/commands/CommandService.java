@@ -1,11 +1,11 @@
 package artopia.services.commands;
 
-import artopia.commands.AbstractCommand;
+import artopia.commands.infrastructure.AbstractCommand;
 import artopia.handlers.ExceptionHandler;
 import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandNotFound;
-import artopia.services.commands.errors.EmptyCommand;
+import artopia.services.commands.errors.CommandEmpty;
 import artopia.services.commands.errors.InternalError;
 
 /**
@@ -23,7 +23,7 @@ public class CommandService {
         CommandResult commandResult;
 
         if (command.length() == 0) {
-            commandResult = this.createCommandResultWithError(command, new EmptyCommand());
+            commandResult = this.createCommandResultWithError(command, new CommandEmpty());
 
             return commandResult;
         }

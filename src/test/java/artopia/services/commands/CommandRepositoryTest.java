@@ -1,8 +1,7 @@
-package artopia.services;
+package artopia.services.commands;
 
-import artopia.commands.AbstractCommand;
 import artopia.commands.AuthorsCommand;
-import artopia.services.commands.CommandRepository;
+import artopia.commands.infrastructure.AbstractCommand;
 import org.junit.Assert;
 import org.junit.Test;
 

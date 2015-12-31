@@ -1,12 +1,14 @@
 package artopia.commands;
 
+import artopia.commands.infrastructure.AbstractCommand;
 import artopia.models.User;
 import artopia.services.commands.CommandResult;
 
 /**
  * @author Rottenwood
  */
-public class ExitCommand extends AbstractCommand {
+public class ExitCommand extends AbstractCommand
+{
 
     private User user;
     private String command = "exit";

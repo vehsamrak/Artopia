@@ -3,7 +3,7 @@ package artopia.services.commands.errors;
 /**
  * @author Rottenwood
  */
-public class EmptyCommand extends AbstractCommandError {
+public class CommandEmpty extends AbstractCommandError {
 
     @Override
     public String getErrorMessage() {
