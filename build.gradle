@@ -1,12 +1,22 @@
 group 'rottenwood'
-version '0.0.1'
+version '0.0.2'
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
     jcenter()
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+check.dependsOn jacocoTestReport
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
