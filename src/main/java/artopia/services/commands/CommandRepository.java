@@ -12,7 +12,6 @@ import java.util.HashMap;
  * @author Vehsamrak
  */
 public class CommandRepository
-
 {
     final private HashMap<String, AbstractCommand> commandList = new HashMap<>();
 
@@ -29,6 +28,7 @@ public class CommandRepository
 
     /**
      * Поиск по названию команды
+     *
      * @param command Название команды
      * @return Объект команды
      */

@@ -4,55 +4,52 @@ import artopia.commands.infrastructure.AbstractCommand;
 import artopia.handlers.ExceptionHandler;
 import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
-import artopia.services.commands.errors.CommandNotFound;
 import artopia.services.commands.errors.CommandEmpty;
+import artopia.services.commands.errors.CommandNotFound;
 import artopia.services.commands.errors.InternalError;
 
 /**
  * @author Rottenwood
  */
-public class CommandService {
+public class CommandService
+{
 
     private final User user;
+    private final CommandRepository commandRepository;
 
-    public CommandService(User user) {
+    public CommandService(User user)
+    {
         this.user = user;
+        this.commandRepository = new CommandRepository();
     }
 
-    public CommandResult execute(String command) {
+    public CommandResult execute(String command)
+    {
         CommandResult commandResult;
 
         if (command.length() == 0) {
-            commandResult = this.createCommandResultWithError(command, new CommandEmpty());
-
-            return commandResult;
+            return this.createCommandResultWithError(command, new CommandEmpty());
         }
 
-        String commandInLowercase = command.toLowerCase();
-        String commandClassName = "artopia.commands."
-                + Character.toString(commandInLowercase.charAt(0)).toUpperCase()
-                + commandInLowercase.substring(1)
-                + "Command";
+        AbstractCommand commandObject = this.commandRepository.findByName(command);
+
+        if (commandObject == null) {
+            return this.createCommandResultWithError(command, new CommandNotFound());
+        }
 
         try {
-            AbstractCommand commandObject = (AbstractCommand) Class.forName(commandClassName).newInstance();
-
             commandResult = commandObject.execute(this.user);
-
         } catch (Exception exception) {
-            if (exception instanceof ClassNotFoundException) {
-                commandResult = this.createCommandResultWithError(command, new CommandNotFound());
-            } else {
-                ExceptionHandler.handle(exception);
+            ExceptionHandler.handle(exception);
 
-                commandResult = this.createCommandResultWithError(command, new InternalError());
-            }
+            commandResult = this.createCommandResultWithError(command, new InternalError());
         }
 
         return commandResult;
     }
 
-    private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError) {
+    private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError)
+    {
         CommandResult commandResult = new CommandResult(command, null);
         commandResult.addError(commandError);
 
