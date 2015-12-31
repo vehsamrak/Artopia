@@ -11,13 +11,23 @@ import org.junit.Test;
 public class CommandRepositoryTest extends Assert
 {
     @Test
-    public void findByName_givenCommandListWithCommands_returnsExistingCommand()
+    public void findByName_commandExistsInRepository_returnsCommand()
     {
         CommandRepository commandRepository = this.createCommandRepository();
 
         AbstractCommand authorsCommand = commandRepository.findByName("authors");
 
         assertTrue(authorsCommand instanceof AuthorsCommand);
+    }
+
+    @Test
+    public void findByName_commandDoesNotExistsInRepository_returnsNull()
+    {
+        CommandRepository commandRepository = this.createCommandRepository();
+
+        AbstractCommand notExistingTestCommand = commandRepository.findByName("notExistingTestCommand");
+
+        assertNull(notExistingTestCommand);
     }
 
     private CommandRepository createCommandRepository()
