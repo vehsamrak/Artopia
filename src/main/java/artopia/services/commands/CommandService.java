@@ -53,7 +53,7 @@ public class CommandService {
     }
 
     private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError) {
-        CommandResult commandResult = new CommandResult(command);
+        CommandResult commandResult = new CommandResult(command, null);
         commandResult.addError(commandError);
 
         return commandResult;

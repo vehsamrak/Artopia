@@ -24,15 +24,6 @@ public class CommandResult {
     }
 
     /**
-     * Команда без результата
-     * // TODO: 25.12.15 Нужно от этого избавиться
-     * @param command команда
-     */
-    public CommandResult(String command) {
-        this.command = command;
-    }
-
-    /**
      * @param error Добавление ошибки
      */
     public void addError(AbstractCommandError error) {
@@ -92,6 +83,7 @@ public class CommandResult {
         return !this.subCommands.isEmpty();
     }
 
+    // TODO: 31.12.15 Реализовать для этой цели систему Event Listening. После чего удалить этот метод
     public ArrayList<String> getSubCommands() {
         return this.subCommands;
     }

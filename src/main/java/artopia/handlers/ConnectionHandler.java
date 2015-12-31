@@ -63,6 +63,7 @@ public class ConnectionHandler implements Runnable {
                     CommandResult commandResult = commandService.execute(command);
                     socketOutput.printf("%s%n%n", commandResult.toString());
 
+                    // TODO: 31.12.15 Реализовать для этой цели систему Event Listening
                     if (commandResult.haveSubCommands() && commandResult.getSubCommands().contains("exit")) {
                         this.disconnect();
                         return;
