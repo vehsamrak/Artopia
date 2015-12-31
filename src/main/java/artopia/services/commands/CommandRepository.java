@@ -34,6 +34,6 @@ public class CommandRepository
      */
     public AbstractCommand findByName(String command)
     {
-        return this.commandList.get(command);
+        return this.commandList.get(command.toLowerCase());
     }
 }
