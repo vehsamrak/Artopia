@@ -2,7 +2,6 @@ package artopia.commands;
 
 import artopia.models.User;
 import artopia.services.commands.CommandResult;
-import artopia.services.commands.CommandService;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,9 +16,7 @@ public class HelpCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsHelpMessage()
     {
-        CommandService commandService = new CommandService(mock(User.class));
-
-        CommandResult commandResult = commandService.execute("help");
+        CommandResult commandResult = new HelpCommand().execute(mock(User.class));
 
         assertFalse(commandResult.haveErrors());
         assertEquals(commandResult.getCommandName(), "help");
