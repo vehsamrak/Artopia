@@ -8,7 +8,4 @@ import artopia.services.commands.CommandResult;
  */
 interface Commandable {
     CommandResult execute(User user);
-
-    User getUser();
-    String getCommandName();
 }

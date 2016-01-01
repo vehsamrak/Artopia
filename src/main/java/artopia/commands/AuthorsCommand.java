@@ -9,25 +9,10 @@ import artopia.services.commands.CommandResult;
  */
 public class AuthorsCommand extends AbstractCommand
 {
-    private User user;
-    private String commandName = "authors";
 
     @Override
     public CommandResult execute(User user)
     {
-        this.user = user;
-        return new CommandResult(this.commandName, "Автор проекта: Petr Karmashev (Vehsamrak)");
-    }
-
-    @Override
-    public User getUser()
-    {
-        return this.user;
-    }
-
-    @Override
-    public String getCommandName()
-    {
-        return this.commandName;
+        return new CommandResult("authors", "Автор проекта: Petr Karmashev (Vehsamrak)");
     }
 }
