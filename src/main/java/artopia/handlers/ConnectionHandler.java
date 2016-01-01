@@ -31,7 +31,7 @@ public class ConnectionHandler implements Runnable {
             this.socketInput = new BufferedReader(in);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 
@@ -78,7 +78,7 @@ public class ConnectionHandler implements Runnable {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
             this.disconnect();
         }
     }
@@ -88,7 +88,7 @@ public class ConnectionHandler implements Runnable {
             this.socket.close();
             System.out.printf("[<] Клиент отключен. (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.handle(e);
         }
     }
 }
