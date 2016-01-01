@@ -10,58 +10,55 @@ import artopia.services.commands.CommandService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
  * @author Rottenwood
  */
-public class ConnectionHandler implements Runnable {
+public class ConnectionHandler implements Runnable
+{
+    private final PrintWriter socketOutput;
     private final Socket socket;
-    private UserService userService;
-    private BufferedReader socketInput;
+    private final BufferedReader socketInput;
+    private final String clientHostName;
+    private final UserService userService;
 
-    public ConnectionHandler(Socket socket, UserService userService) {
+    public ConnectionHandler(Socket socket, BufferedReader socketInput, PrintWriter socketOutput, UserService userService)
+    {
         this.socket = socket;
+        this.socketInput = socketInput;
+        this.socketOutput = socketOutput;
+        this.clientHostName = socket.getInetAddress().getCanonicalHostName();
         this.userService = userService;
-
-        try {
-            InputStreamReader in = new InputStreamReader(this.socket.getInputStream());
-            this.socketInput = new BufferedReader(in);
-
-        } catch (IOException e) {
-            ExceptionHandler.handle(e);
-        }
     }
 
     @Override
-    public void run() {
-        System.out.printf("[>] Новое подключение! (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
+    public void run()
+    {
+        System.out.printf("[>] Новое подключение! (%s)%n", this.clientHostName);
 
         try {
-            PrintWriter socketOutput = new PrintWriter(this.socket.getOutputStream(), true);
-
-            socketOutput.println("Добро пожаловать в JavaMud!");
-            socketOutput.println("Введите ваше имя: ");
+            this.socketOutput.println("Добро пожаловать в JavaMud!");
+            this.socketOutput.println("Введите ваше имя: ");
             String username = this.socketInput.readLine();
 
-            socketOutput.println("Введите пароль: ");
+            this.socketOutput.println("Введите пароль: ");
             String password = this.socketInput.readLine();
 
             try {
                 User user = this.userService.login(username, password);
 
-                socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
+                this.socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
 
                 CommandService commandService = new CommandService(user);
 
                 while (true) {
-                    socketOutput.println("Введите команду:");
+                    this.socketOutput.println("Введите команду:");
                     String command = this.socketInput.readLine();
 
                     CommandResult commandResult = commandService.execute(command);
-                    socketOutput.printf("%s%n%n", commandResult.toString());
+                    this.socketOutput.printf("%s%n%n", commandResult.toString());
 
                     // TODO: 31.12.15 Реализовать для этой цели систему Event Listening
                     if (commandResult.haveSubCommands() && commandResult.getSubCommands().contains("exit")) {
@@ -70,25 +67,21 @@ public class ConnectionHandler implements Runnable {
                     }
                 }
             } catch (EmptyPassword | EmptyUsername exception) {
-                socketOutput.println("Логин и пароль не могут быть пустыми!");
+                this.socketOutput.println("Логин и пароль не могут быть пустыми!");
                 this.disconnect();
             } catch (WrongPassword exception) {
-                socketOutput.println("Неверный пароль!");
+                this.socketOutput.println("Неверный пароль!");
                 this.disconnect();
             }
-
-        } catch (IOException e) {
-            ExceptionHandler.handle(e);
-            this.disconnect();
+        } catch (IOException exception) {
+            this.socketOutput.println("Ошибка!");
+            ExceptionHandler.handle(exception);
         }
     }
 
-    public void disconnect() {
-        try {
-            this.socket.close();
-            System.out.printf("[<] Клиент отключен. (%s)%n", this.socket.getInetAddress().getCanonicalHostName());
-        } catch (IOException e) {
-            ExceptionHandler.handle(e);
-        }
+    public void disconnect() throws IOException
+    {
+        this.socket.close();
+        System.out.printf("[<] Клиент отключен. (%s)%n", this.clientHostName);
     }
 }

@@ -1,7 +1,11 @@
 import artopia.handlers.ConnectionHandler;
+import artopia.handlers.ExceptionHandler;
 import artopia.services.DatabaseService;
 import artopia.services.UserService;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,12 +28,15 @@ public class Main {
             while (true) {
                 Socket socket = serverSocket.accept();
 
-                Runnable connectionHandler = new ConnectionHandler(socket, userService);
+                BufferedReader socketInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter socketOutput = new PrintWriter(socket.getOutputStream(), true);
+
+                Runnable connectionHandler = new ConnectionHandler(socket, socketInput, socketOutput, userService);
                 new Thread(connectionHandler).start();
 
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            ExceptionHandler.handle(exception);
         }
     }
 }
