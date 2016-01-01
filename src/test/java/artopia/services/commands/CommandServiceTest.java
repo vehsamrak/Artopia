@@ -1,45 +1,42 @@
 package artopia.services.commands;
 
-import artopia.exceptions.EmptyPassword;
-import artopia.exceptions.EmptyUsername;
 import artopia.models.User;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 /**
  * @author Rottenwood
  */
-public class CommandServiceTest extends Assert {
+public class CommandServiceTest extends Assert
+{
 
     @Test
-    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError() {
-        CommandService commandService = new CommandService(this.createUser());
+    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError()
+    {
+        CommandService commandService = createCommandService();
 
-        String command = "unexistingCommandForTest";
-        CommandResult commandResult = commandService.execute(command);
+        CommandResult commandResult = commandService.execute("unexistingCommandForTest");
 
         assertTrue(commandResult.haveErrors());
         assertEquals(CommandNotFound.class, commandResult.getErrors().get(0).getClass());
     }
 
-    private User createUser() {
-        try {
-            return new User("tester", "password");
-        } catch (EmptyUsername | EmptyPassword exception) {
-            exception.printStackTrace();
-            return null;
-        }
-    }
-
     @Test
-    public void execute_givenHelpCommand_returnCommandResultWithEqualCommandName() {
-        CommandService commandService = new CommandService(this.createUser());
+    public void execute_givenAuthorsCommand_returnCommandResultWithEqualCommandName()
+    {
+        CommandService commandService = createCommandService();
 
-        String command = "help";
-        CommandResult commandResult = commandService.execute(command);
+        CommandResult commandResult = commandService.execute("authors");
 
         assertFalse(commandResult.haveErrors());
-        assertEquals(commandResult.getCommandName(), command);
+        assertEquals(commandResult.getCommandName(), "authors");
+    }
+
+    private CommandService createCommandService()
+    {
+        return new CommandService(mock(User.class));
     }
 }
