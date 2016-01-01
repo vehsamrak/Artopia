@@ -3,5 +3,4 @@ package artopia.exceptions;
 /**
  * @author Rottenwood
  */
-public class EmptyPassword extends Exception {
-}
+public class EmptyPassword extends Exception {}
