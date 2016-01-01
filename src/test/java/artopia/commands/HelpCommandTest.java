@@ -1,41 +1,32 @@
 package artopia.commands;
 
-import artopia.exceptions.EmptyPassword;
-import artopia.exceptions.EmptyUsername;
 import artopia.models.User;
 import artopia.services.commands.CommandResult;
 import artopia.services.commands.CommandService;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 /**
  * @author Rottenwood
  */
-public class HelpCommandTest extends Assert {
+public class HelpCommandTest extends Assert
+{
 
     @Test
-    public void execute_noParameters_returnsHelpMessage() {
-        User user = null;
-        try {
-            user = new User("tester", "password");
-        } catch (EmptyUsername | EmptyPassword exception) {
-            exception.printStackTrace();
-            assertTrue(false);
-        }
+    public void execute_noParameters_returnsHelpMessage()
+    {
+        CommandService commandService = new CommandService(mock(User.class));
 
-        CommandService commandService = new CommandService(user);
+        CommandResult commandResult = commandService.execute("help");
 
-        String command = "help";
-        CommandResult commandResult = commandService.execute(command);
-
-        String helpCommandResultString = "" +
+        assertFalse(commandResult.haveErrors());
+        assertEquals(commandResult.getCommandName(), "help");
+        assertEquals(commandResult.toString(), "" +
                 "Доступные команды:\n" +
                 "help - игровая информация\n" +
                 "look - посмотреть вокруг\n" +
-                "exit - выход из игры";
-
-        assertFalse(commandResult.haveErrors());
-        assertEquals(commandResult.getCommandName(), command);
-        assertEquals(commandResult.toString(), helpCommandResultString);
+                "exit - выход из игры");
     }
 }
