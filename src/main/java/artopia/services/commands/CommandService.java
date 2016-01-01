@@ -25,8 +25,6 @@ public class CommandService
 
     public CommandResult execute(String command)
     {
-        CommandResult commandResult;
-
         if (command.length() == 0) {
             return this.createCommandResultWithError(command, new CommandEmpty());
         }
@@ -36,6 +34,8 @@ public class CommandService
         if (commandObject == null) {
             return this.createCommandResultWithError(command, new CommandNotFound());
         }
+
+        CommandResult commandResult;
 
         try {
             commandResult = commandObject.execute(this.user);

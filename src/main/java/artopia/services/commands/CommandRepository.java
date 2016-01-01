@@ -1,39 +1,54 @@
 package artopia.services.commands;
 
-import artopia.commands.infrastructure.AbstractCommand;
 import artopia.commands.AuthorsCommand;
 import artopia.commands.ExitCommand;
 import artopia.commands.HelpCommand;
 import artopia.commands.LookCommand;
+import artopia.commands.infrastructure.AbstractCommand;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Vehsamrak
  */
 public class CommandRepository
 {
-    final private HashMap<String, AbstractCommand> commandList = new HashMap<>();
+    final private HashMap<AbstractCommand, String[]> commandList = new HashMap<>();
 
     /**
      * Список всех игровых команд
+     * TODO: 01.01.16 Должно быть вынесено в отдельный конфиг
      */
     public CommandRepository()
     {
-        this.commandList.put("look", new LookCommand());
-        this.commandList.put("authors", new AuthorsCommand());
-        this.commandList.put("exit", new ExitCommand());
-        this.commandList.put("help", new HelpCommand());
+        this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
+        this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
+        this.commandList.put(new ExitCommand(), new String[]{"exit", "quit", "выход"});
+        this.commandList.put(new HelpCommand(), new String[]{"help", "помощь"});
     }
 
     /**
-     * Поиск по названию команды
-     *
-     * @param command Название команды
+     * Поиск по названию или алиасу команды
+     * @param commandName Название команды или алиас
      * @return Объект команды
      */
-    public AbstractCommand findByName(String command)
+    public AbstractCommand findByName(String commandName)
     {
-        return this.commandList.get(command.toLowerCase());
+        commandName = commandName.toLowerCase();
+
+        for (Map.Entry<AbstractCommand, String[]> entry : this.commandList.entrySet()) {
+            AbstractCommand command = entry.getKey();
+            String[] commandAliases = entry.getValue();
+
+            for (String commandAlias : commandAliases) {
+                if (Objects.equals(commandName, commandAlias)) {
+                    return command;
+                }
+            }
+        }
+
+        return null;
     }
 }
