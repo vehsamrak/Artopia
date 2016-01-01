@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * @author Rottenwood
  */
-public class ArrayHelper {
+public abstract class ArrayHelper {
 
     /**
      * Преобразование ArrayList в строку
