@@ -3,8 +3,10 @@ package artopia.handlers;
 /**
  * @author Rottenwood
  */
-public class ExceptionHandler {
-    public static void handle(Exception exception) {
+public final class ExceptionHandler {
+    public static boolean handle(Exception exception) {
         exception.printStackTrace();
+
+        return true;
     }
 }

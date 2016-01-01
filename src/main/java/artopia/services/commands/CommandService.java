@@ -1,12 +1,10 @@
 package artopia.services.commands;
 
 import artopia.commands.infrastructure.AbstractCommand;
-import artopia.handlers.ExceptionHandler;
 import artopia.models.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandEmpty;
 import artopia.services.commands.errors.CommandNotFound;
-import artopia.services.commands.errors.InternalError;
 
 /**
  * @author Rottenwood
@@ -35,17 +33,7 @@ public class CommandService
             return this.createCommandResultWithError(command, new CommandNotFound());
         }
 
-        CommandResult commandResult;
-
-        try {
-            commandResult = commandObject.execute(this.user);
-        } catch (Exception exception) {
-            ExceptionHandler.handle(exception);
-
-            commandResult = this.createCommandResultWithError(command, new InternalError());
-        }
-
-        return commandResult;
+        return commandObject.execute(this.user);
     }
 
     private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError)

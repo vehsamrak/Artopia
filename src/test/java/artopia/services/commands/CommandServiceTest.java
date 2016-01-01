@@ -1,6 +1,7 @@
 package artopia.services.commands;
 
 import artopia.models.User;
+import artopia.services.commands.errors.CommandEmpty;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +13,17 @@ import static org.mockito.Mockito.mock;
  */
 public class CommandServiceTest extends Assert
 {
+
+    @Test
+    public void execute_givenEmptyCommand_returnCommandResultWithEmptyCommandError()
+    {
+        CommandService commandService = createCommandService();
+
+        CommandResult commandResult = commandService.execute("");
+
+        assertTrue(commandResult.haveErrors());
+        assertEquals(CommandEmpty.class, commandResult.getErrors().get(0).getClass());
+    }
 
     @Test
     public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError()
