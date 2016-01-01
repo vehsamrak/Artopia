@@ -22,4 +22,11 @@ public class ArrayHelperTest extends Assert {
 
         assertEquals("First string, Second string, Third string", resultString);
     }
+
+    @Test
+    public void ArrayHelper_constructorCalled_returnsNewObject()
+    {
+        ArrayHelper arrayHelper = new ArrayHelper();
+        assertNotNull(arrayHelper);
+    }
 }
