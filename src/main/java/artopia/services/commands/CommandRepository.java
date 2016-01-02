@@ -8,7 +8,6 @@ import artopia.commands.infrastructure.AbstractCommand;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Vehsamrak
@@ -31,19 +30,19 @@ public class CommandRepository
 
     /**
      * Поиск по названию или алиасу команды
-     * @param commandName Название команды или алиас
+     * @param inputCommand Название команды или алиас
      * @return Объект команды
      */
-    public AbstractCommand findByName(String commandName)
+    public AbstractCommand findByName(String inputCommand)
     {
-        commandName = commandName.toLowerCase();
+        inputCommand = inputCommand.toLowerCase();
 
         for (Map.Entry<AbstractCommand, String[]> entry : this.commandList.entrySet()) {
             AbstractCommand command = entry.getKey();
             String[] commandAliases = entry.getValue();
 
             for (String commandAlias : commandAliases) {
-                if (Objects.equals(commandName, commandAlias)) {
+                if (commandAlias.startsWith(inputCommand)) {
                     return command;
                 }
             }
