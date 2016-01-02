@@ -1,5 +1,14 @@
+# Intellij IDEA
 /.idea
-/build
-/.gradle
-/src/main/resources/hibernate.cfg.xml
 *.iml
+
+# Gradle
+/.gradle
+
+# Hibernate config
+/src/main/resources/hibernate.cfg.xml
+
+# Build artefacts
+/build
+/out
+/META-INF
