@@ -44,6 +44,15 @@ public class CommandRepositoryTest extends Assert
         assertTrue(commandRepository.findByName("author") instanceof AuthorsCommand);
     }
 
+    @Test
+    public void getDescriptions_repositoryWithCommands_returnsSummaryStringWithAllDescriptions()
+    {
+        CommandRepository commandRepository = this.createCommandRepository();
+        String commandsDescription = commandRepository.getDescriptions();
+
+        assertTrue(commandsDescription.startsWith("Игровые команды\n===============\n"));
+    }
+
     private CommandRepository createCommandRepository()
     {
         return new CommandRepository();
