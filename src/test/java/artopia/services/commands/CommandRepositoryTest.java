@@ -40,6 +40,16 @@ public class CommandRepositoryTest extends Assert
         assertNull(notExistingTestCommand);
     }
 
+    @Test
+    public void findByName_partialAliasExistsInRepository_returnsCommand()
+    {
+        CommandRepository commandRepository = this.createCommandRepository();
+
+        AbstractCommand authorsCommand = commandRepository.findByName("autho");
+
+        assertTrue(authorsCommand instanceof AuthorsCommand);
+    }
+
     private CommandRepository createCommandRepository()
     {
         return new CommandRepository();
