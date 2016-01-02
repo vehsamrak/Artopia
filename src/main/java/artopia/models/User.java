@@ -2,6 +2,7 @@ package artopia.models;
 
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
 
@@ -39,7 +40,7 @@ public class User
         username = Character.toString(usernameInLowercase.charAt(0)).toUpperCase() + usernameInLowercase.substring(1);
 
         this.username = username;
-        this.password = password;
+        this.password = this.encryptPassword(password);
     }
 
 
@@ -61,5 +62,22 @@ public class User
 
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * @param plainPassword Пароль в незашифрованном виде
+     * @return true если пароль верный
+     */
+    public boolean isPasswordValid(String plainPassword) {
+        return this.encryptPassword(plainPassword).equals(this.password);
+    }
+
+    /**
+     * @param password Пароль
+     * @return Зашифрованная средствами MD5 строка пароля
+     */
+    private String encryptPassword(String password)
+    {
+        return DigestUtils.md5Hex(password);
     }
 }

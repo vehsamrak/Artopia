@@ -15,15 +15,18 @@ public class UserService
 {
     private DatabaseService databaseService;
 
-    public UserService(DatabaseService databaseService) {
+    public UserService(DatabaseService databaseService)
+    {
         this.databaseService = databaseService;
     }
 
-    public User login(String username, String password) throws EmptyPassword, EmptyUsername, WrongPassword {
+    public User login(String username, String password) throws EmptyPassword, EmptyUsername, WrongPassword
+    {
         Session session = this.databaseService.getSession();
 
         Query query = session.createQuery("FROM User WHERE username=:username");
         query.setParameter("username", username);
+
         User user = (User) query.uniqueResult();
 
         if (user == null) {
@@ -34,7 +37,7 @@ public class UserService
             session.persist(user);
             transaction.commit();
         } else {
-            if (!password.equals(user.getPassword())) {
+            if (!user.isPasswordValid(password)) {
                 throw new WrongPassword();
             }
         }
