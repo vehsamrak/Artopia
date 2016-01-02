@@ -2,6 +2,7 @@ package artopia.commands;
 
 import artopia.commands.infrastructure.AbstractCommand;
 import artopia.models.User;
+import artopia.services.commands.CommandRepository;
 import artopia.services.commands.CommandResult;
 
 /**
@@ -9,16 +10,10 @@ import artopia.services.commands.CommandResult;
  */
 public class HelpCommand extends AbstractCommand
 {
-
     @Override
     public CommandResult execute(User user) {
-        String commandResult = "" +
-                "Доступные команды:\n" +
-                "help - игровая информация\n" +
-                "look - посмотреть вокруг\n" +
-                "exit - выход из игры";
-
-        return new CommandResult("help", commandResult);
+        // TODO: 03.01.16 Нужно запрашивать CommandRepository из DI, когда он появится
+        return new CommandResult("help", new CommandRepository().getDescriptions());
     }
 
     @Override

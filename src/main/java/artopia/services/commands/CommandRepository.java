@@ -26,8 +26,8 @@ public class CommandRepository
     {
         this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
         this.commandList.put(new ExitCommand(), new String[]{"exit", "quit", "выход"});
-        this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
         this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
+        this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
     }
 
     /**

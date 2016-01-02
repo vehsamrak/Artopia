@@ -20,10 +20,8 @@ public class HelpCommandTest extends Assert
 
         assertFalse(commandResult.haveErrors());
         assertEquals(commandResult.getCommandName(), "help");
-        assertEquals(commandResult.toString(), "" +
-                "Доступные команды:\n" +
-                "help - игровая информация\n" +
-                "look - посмотреть вокруг\n" +
-                "exit - выход из игры");
+        assertTrue(commandResult.toString().startsWith("Игровые команды\n===============\n" +
+                "authors, credits, авторы - информация об авторах проекта\n"));
+        assertTrue(commandResult.toString().contains("\nexit, quit, выход - выход из игры\n"));
     }
 }
