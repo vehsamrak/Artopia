@@ -50,7 +50,9 @@ public class CommandRepositoryTest extends Assert
         CommandRepository commandRepository = this.createCommandRepository();
         String commandsDescription = commandRepository.getDescriptions();
 
-        assertTrue(commandsDescription.startsWith("Игровые команды\n===============\n"));
+        assertTrue(commandsDescription.startsWith("Игровые команды\n===============\n" +
+                "authors, credits, авторы - информация об авторах проекта\n"));
+        assertTrue(commandsDescription.contains("\nexit, quit, выход - выход из игры\n"));
     }
 
     private CommandRepository createCommandRepository()
