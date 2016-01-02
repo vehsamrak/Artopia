@@ -20,4 +20,10 @@ public class HelpCommand extends AbstractCommand
 
         return new CommandResult("help", commandResult);
     }
+
+    @Override
+    public String getDescription()
+    {
+        return "игровая информация";
+    }
 }

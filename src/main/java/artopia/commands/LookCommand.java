@@ -17,4 +17,10 @@ public class LookCommand extends AbstractCommand
 
         return new CommandResult("look", commandResult);
     }
+
+    @Override
+    public String getDescription()
+    {
+        return "посмотреть вокруг";
+    }
 }

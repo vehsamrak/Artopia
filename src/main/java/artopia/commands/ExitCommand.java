@@ -17,4 +17,10 @@ public class ExitCommand extends AbstractCommand
 
         return commandResult;
     }
+
+    @Override
+    public String getDescription()
+    {
+        return "выход из игры";
+    }
 }

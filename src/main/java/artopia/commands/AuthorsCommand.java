@@ -15,4 +15,10 @@ public class AuthorsCommand extends AbstractCommand
     {
         return new CommandResult("authors", "Автор проекта: Petr Karmashev (Vehsamrak)");
     }
+
+    @Override
+    public String getDescription()
+    {
+        return "информация об авторах проекта";
+    }
 }
