@@ -6,6 +6,7 @@ import artopia.services.commands.CommandResult;
 /**
  * @author Rottenwood
  */
-interface Commandable {
+interface Executable
+{
     CommandResult execute(User user);
 }
