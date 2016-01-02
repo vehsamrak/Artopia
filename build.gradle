@@ -40,4 +40,5 @@ dependencies {
     compile 'org.hibernate:hibernate-entitymanager:5.0.6.Final'
     compile 'mysql:mysql-connector-java:5.1.31'
     compile 'javax.transaction:jta:1.1'
+    compile 'commons-codec:commons-codec:1.10'
 }
