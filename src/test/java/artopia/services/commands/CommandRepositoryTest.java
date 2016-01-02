@@ -1,7 +1,6 @@
 package artopia.services.commands;
 
 import artopia.commands.AuthorsCommand;
-import artopia.commands.infrastructure.AbstractCommand;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,9 +14,7 @@ public class CommandRepositoryTest extends Assert
     {
         CommandRepository commandRepository = this.createCommandRepository();
 
-        AbstractCommand authorsCommand = commandRepository.findByName("authors");
-
-        assertTrue(authorsCommand instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("authors") instanceof AuthorsCommand);
     }
 
     @Test
@@ -25,9 +22,7 @@ public class CommandRepositoryTest extends Assert
     {
         CommandRepository commandRepository = this.createCommandRepository();
 
-        AbstractCommand authorsCommand = commandRepository.findByName("авторы");
-
-        assertTrue(authorsCommand instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("авторы") instanceof AuthorsCommand);
     }
 
     @Test
@@ -35,9 +30,7 @@ public class CommandRepositoryTest extends Assert
     {
         CommandRepository commandRepository = this.createCommandRepository();
 
-        AbstractCommand notExistingTestCommand = commandRepository.findByName("notExistingTestCommand");
-
-        assertNull(notExistingTestCommand);
+        assertNull(commandRepository.findByName("notExistingTestCommand"));
     }
 
     @Test
@@ -45,9 +38,10 @@ public class CommandRepositoryTest extends Assert
     {
         CommandRepository commandRepository = this.createCommandRepository();
 
-        AbstractCommand authorsCommand = commandRepository.findByName("autho");
-
-        assertTrue(authorsCommand instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("aut") instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("auth") instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("autho") instanceof AuthorsCommand);
+        assertTrue(commandRepository.findByName("author") instanceof AuthorsCommand);
     }
 
     private CommandRepository createCommandRepository()
