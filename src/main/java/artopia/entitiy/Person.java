@@ -14,9 +14,8 @@ import java.util.Date;
  * @author Vehsamrak
  */
 @Entity
-@Table(name = "characters")
+@Table(name = "persons")
 public class Person
-
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
