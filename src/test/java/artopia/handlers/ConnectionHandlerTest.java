@@ -3,7 +3,7 @@ package artopia.handlers;
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 import artopia.exceptions.WrongPassword;
-import artopia.models.User;
+import artopia.entities.User;
 import artopia.services.UserService;
 import org.junit.Assert;
 import org.junit.Before;

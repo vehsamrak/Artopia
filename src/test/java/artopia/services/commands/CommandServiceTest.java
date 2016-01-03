@@ -1,6 +1,6 @@
 package artopia.services.commands;
 
-import artopia.models.User;
+import artopia.entities.User;
 import artopia.services.commands.errors.CommandEmpty;
 import artopia.services.commands.errors.CommandNotFound;
 import org.junit.Assert;

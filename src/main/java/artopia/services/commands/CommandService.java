@@ -1,7 +1,7 @@
 package artopia.services.commands;
 
 import artopia.commands.infrastructure.AbstractCommand;
-import artopia.models.User;
+import artopia.entities.User;
 import artopia.services.commands.errors.AbstractCommandError;
 import artopia.services.commands.errors.CommandEmpty;
 import artopia.services.commands.errors.CommandNotFound;

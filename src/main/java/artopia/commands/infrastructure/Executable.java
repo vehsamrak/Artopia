@@ -1,6 +1,6 @@
 package artopia.commands.infrastructure;
 
-import artopia.models.User;
+import artopia.entities.User;
 import artopia.services.commands.CommandResult;
 
 /**

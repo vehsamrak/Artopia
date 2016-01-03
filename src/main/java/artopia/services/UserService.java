@@ -3,7 +3,7 @@ package artopia.services;
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 import artopia.exceptions.WrongPassword;
-import artopia.models.User;
+import artopia.entities.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

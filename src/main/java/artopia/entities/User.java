@@ -1,10 +1,16 @@
-package artopia.models;
+package artopia.entities;
 
 import artopia.exceptions.EmptyPassword;
 import artopia.exceptions.EmptyUsername;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Rottenwood
@@ -14,7 +20,7 @@ import javax.persistence.*;
 public class User
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "username")
@@ -29,7 +35,8 @@ public class User
     public User() {}
 
     // TODO: 22.12.15 Обработка пароля
-    public User(String username, String password) throws EmptyUsername, EmptyPassword {
+    public User(String username, String password) throws EmptyUsername, EmptyPassword
+    {
         if (username.equals("")) {
             throw new EmptyUsername();
         } else if (password.equals("")) {
@@ -43,32 +50,32 @@ public class User
         this.password = this.encryptPassword(password);
     }
 
-
-    public boolean isAuthenticated() {
+    public boolean isAuthenticated()
+    {
         return isAuthenticated;
     }
 
-    public void authenticate() {
+    public void authenticate()
+    {
         isAuthenticated = true;
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public long getId() {
+    public long getId()
+    {
         return id;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     /**
      * @param plainPassword Пароль в незашифрованном виде
      * @return true если пароль верный
      */
-    public boolean isPasswordValid(String plainPassword) {
+    public boolean isPasswordValid(String plainPassword)
+    {
         return this.encryptPassword(plainPassword).equals(this.password);
     }
 

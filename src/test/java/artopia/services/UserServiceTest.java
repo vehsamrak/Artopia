@@ -1,6 +1,6 @@
 package artopia.services;
 
-import artopia.models.User;
+import artopia.entities.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.junit.Assert;
