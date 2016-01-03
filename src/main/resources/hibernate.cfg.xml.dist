@@ -9,7 +9,7 @@
         <property name="connection.username">root</property>
         <property name="connection.password"/>
         <property name="show_sql">true</property>
-        <property name="hibernate.id.new_generator_mappings">false</property>
+        <property name="hibernate.id.new_generator_mappings">true</property>
 
         <mapping class="artopia.models.User"/>
     </session-factory>
