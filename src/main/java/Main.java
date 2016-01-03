@@ -1,7 +1,7 @@
-import artopia.handlers.ConnectionHandler;
-import artopia.handlers.ExceptionHandler;
-import artopia.services.DatabaseService;
-import artopia.services.UserService;
+import artopia.handler.ConnectionHandler;
+import artopia.handler.ExceptionHandler;
+import artopia.service.DatabaseService;
+import artopia.service.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

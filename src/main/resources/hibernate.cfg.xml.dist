@@ -11,6 +11,6 @@
         <property name="show_sql">true</property>
         <property name="hibernate.id.new_generator_mappings">true</property>
 
-        <mapping class="artopia.entities.User"/>
+        <mapping class="artopia.entitiy.User"/>
     </session-factory>
 </hibernate-configuration>
