@@ -1,10 +1,13 @@
 package artopia.entitiy;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +45,8 @@ public class Person
     @Column(name = "cyrillic_name_6", length = 32, nullable = false)
     private String cyrillicName6;
 
-    @Column(name = "user_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Temporal(TemporalType.DATE)
@@ -50,4 +54,16 @@ public class Person
     private Date createdAt = new Date();
 
     public Person() {}
+
+    public Person(String name, User user)
+    {
+        this.user = user;
+        this.name = name;
+        this.cyrillicName = name;
+        this.cyrillicName2 = name;
+        this.cyrillicName3 = name;
+        this.cyrillicName4 = name;
+        this.cyrillicName5 = name;
+        this.cyrillicName6 = name;
+    }
 }

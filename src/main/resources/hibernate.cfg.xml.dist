@@ -10,7 +10,9 @@
         <property name="connection.password"/>
         <property name="show_sql">true</property>
         <property name="hibernate.id.new_generator_mappings">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="artopia.entitiy.User"/>
+        <mapping class="artopia.entitiy.Person"/>
     </session-factory>
 </hibernate-configuration>
