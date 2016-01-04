@@ -1,4 +1,4 @@
-package artopia.service.commands.errors;
+package artopia.service.command.errors;
 
 /**
  * @author Rottenwood

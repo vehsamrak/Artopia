@@ -1,7 +1,7 @@
 package artopia.command;
 
 import artopia.entitiy.User;
-import artopia.service.commands.CommandResult;
+import artopia.service.command.CommandResult;
 import org.junit.Assert;
 import org.junit.Test;
 

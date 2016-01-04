@@ -1,8 +1,8 @@
-package artopia.service.commands;
+package artopia.service.command;
 
 import artopia.entitiy.User;
-import artopia.service.commands.errors.CommandEmpty;
-import artopia.service.commands.errors.CommandNotFound;
+import artopia.service.command.errors.CommandEmpty;
+import artopia.service.command.errors.CommandNotFound;
 import org.junit.Assert;
 import org.junit.Test;
 

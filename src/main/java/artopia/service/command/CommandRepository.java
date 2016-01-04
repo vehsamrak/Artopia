@@ -1,4 +1,4 @@
-package artopia.service.commands;
+package artopia.service.command;
 
 import artopia.command.AuthorsCommand;
 import artopia.command.ExitCommand;

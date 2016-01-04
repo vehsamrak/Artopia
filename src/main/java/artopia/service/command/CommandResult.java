@@ -1,6 +1,6 @@
-package artopia.service.commands;
+package artopia.service.command;
 
-import artopia.service.commands.errors.AbstractCommandError;
+import artopia.service.command.errors.AbstractCommandError;
 
 import java.util.ArrayList;
 

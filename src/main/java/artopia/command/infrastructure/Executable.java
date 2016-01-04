@@ -1,7 +1,7 @@
 package artopia.command.infrastructure;
 
 import artopia.entitiy.User;
-import artopia.service.commands.CommandResult;
+import artopia.service.command.CommandResult;
 
 /**
  * @author Rottenwood

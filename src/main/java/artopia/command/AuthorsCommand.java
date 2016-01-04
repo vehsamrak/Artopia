@@ -2,7 +2,7 @@ package artopia.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
-import artopia.service.commands.CommandResult;
+import artopia.service.command.CommandResult;
 
 /**
  * @author Vehsamrak

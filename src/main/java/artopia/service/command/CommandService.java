@@ -1,10 +1,10 @@
-package artopia.service.commands;
+package artopia.service.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
-import artopia.service.commands.errors.AbstractCommandError;
-import artopia.service.commands.errors.CommandEmpty;
-import artopia.service.commands.errors.CommandNotFound;
+import artopia.service.command.errors.AbstractCommandError;
+import artopia.service.command.errors.CommandEmpty;
+import artopia.service.command.errors.CommandNotFound;
 
 /**
  * @author Rottenwood

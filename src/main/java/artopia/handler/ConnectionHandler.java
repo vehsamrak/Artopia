@@ -5,8 +5,8 @@ import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
 import artopia.entitiy.User;
 import artopia.service.UserService;
-import artopia.service.commands.CommandResult;
-import artopia.service.commands.CommandService;
+import artopia.service.command.CommandResult;
+import artopia.service.command.CommandService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
