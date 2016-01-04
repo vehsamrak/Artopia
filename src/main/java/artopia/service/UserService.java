@@ -1,9 +1,10 @@
 package artopia.service;
 
+import artopia.entitiy.Person;
+import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
-import artopia.entitiy.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,8 +34,12 @@ public class UserService
             user = new User(username, password);
             user.authenticate();
 
+            // TODO: 04.01.16 Нужно генерировать кириллическое имя для персонажа
+            Person person = new Person(username, user);
+
             Transaction transaction = session.beginTransaction();
             session.persist(user);
+            session.persist(person);
             transaction.commit();
         } else {
             if (!user.isPasswordValid(password)) {
