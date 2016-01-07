@@ -13,6 +13,5 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="artopia.entitiy.User"/>
-        <mapping class="artopia.entitiy.Person"/>
     </session-factory>
 </hibernate-configuration>

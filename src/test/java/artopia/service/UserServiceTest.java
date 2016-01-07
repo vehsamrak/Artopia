@@ -67,7 +67,7 @@ public class UserServiceTest extends Assert
         User mockedUser = mock(User.class);
         when(mockedUser.isAuthenticated()).thenReturn(true);
         when(mockedUser.isPasswordValid(anyString())).thenReturn(true);
-        when(mockedUser.getUsername()).thenReturn("Tester");
+        when(mockedUser.getName()).thenReturn("Tester");
 
         return mockedUser;
     }

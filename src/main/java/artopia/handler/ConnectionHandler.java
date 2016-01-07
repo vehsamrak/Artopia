@@ -40,16 +40,16 @@ public class ConnectionHandler implements Runnable
 
         try {
             this.socketOutput.println("Добро пожаловать в JavaMud!");
-            this.socketOutput.println("Введите ваше имя: ");
-            String username = this.socketInput.readLine();
+            this.socketOutput.println("Введите имя персонажа: ");
+            String name = this.socketInput.readLine();
 
             this.socketOutput.println("Введите пароль: ");
             String password = this.socketInput.readLine();
 
             try {
-                User user = this.userService.login(username, password);
+                User user = this.userService.login(name, password);
 
-                this.socketOutput.printf("Добро пожаловать, %s!%n", user.getUsername());
+                this.socketOutput.printf("Добро пожаловать, %s!%n", user.getName());
 
                 CommandService commandService = new CommandService(user);
 

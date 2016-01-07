@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import java.util.Date;
 
 /**
  * @author Rottenwood
@@ -23,31 +26,61 @@ public class User
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name", length = 32, nullable = false)
+    private String name;
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "cyrillic_name", length = 32, nullable = false)
+    private String cyrillicName;
+
+    @Column(name = "cyrillic_name_2", length = 32, nullable = false)
+    private String cyrillicName2;
+
+    @Column(name = "cyrillic_name_3", length = 32, nullable = false)
+    private String cyrillicName3;
+
+    @Column(name = "cyrillic_name_4", length = 32, nullable = false)
+    private String cyrillicName4;
+
+    @Column(name = "cyrillic_name_5", length = 32, nullable = false)
+    private String cyrillicName5;
+
+    @Column(name = "cyrillic_name_6", length = 32, nullable = false)
+    private String cyrillicName6;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "created_at")
+    private Date createdAt = new Date();
+
+    @Column(name = "room_id")
+    private String roomId = "system-start";
 
     @Transient
     private boolean isAuthenticated = false;
 
     public User() {}
 
-    // TODO: 22.12.15 Обработка пароля
-    public User(String username, String password) throws EmptyUsername, EmptyPassword
+    public User(String name, String password) throws EmptyUsername, EmptyPassword
     {
-        if (username.equals("")) {
+        if (name.equals("")) {
             throw new EmptyUsername();
         } else if (password.equals("")) {
             throw new EmptyPassword();
         }
 
-        String usernameInLowercase = username.toLowerCase();
-        username = Character.toString(usernameInLowercase.charAt(0)).toUpperCase() + usernameInLowercase.substring(1);
+        String nameLowercase = name.toLowerCase();
+        name = Character.toString(nameLowercase.charAt(0)).toUpperCase() + nameLowercase.substring(1);
 
-        this.username = username;
+        this.name = name;
         this.password = this.encryptPassword(password);
+        this.cyrillicName = name;
+        this.cyrillicName2 = name;
+        this.cyrillicName3 = name;
+        this.cyrillicName4 = name;
+        this.cyrillicName5 = name;
+        this.cyrillicName6 = name;
     }
 
     public boolean isAuthenticated()
@@ -60,9 +93,9 @@ public class User
         isAuthenticated = true;
     }
 
-    public String getUsername()
+    public String getName()
     {
-        return username;
+        return name;
     }
 
     public long getId()

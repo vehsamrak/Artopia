@@ -150,7 +150,7 @@ public class ConnectionHandlerTest extends Assert
     {
         User user = mock(User.class);
 
-        when(user.getUsername()).thenReturn("Tester");
+        when(user.getName()).thenReturn("Tester");
 
         return user;
     }

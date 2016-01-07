@@ -1,6 +1,5 @@
 package artopia.service;
 
-import artopia.entitiy.Person;
 import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
@@ -21,25 +20,22 @@ public class UserService
         this.databaseService = databaseService;
     }
 
-    public User login(String username, String password) throws EmptyPassword, EmptyUsername, WrongPassword
+    public User login(String name, String password) throws EmptyPassword, EmptyUsername, WrongPassword
     {
         Session session = this.databaseService.getSession();
 
-        Query query = session.createQuery("FROM User WHERE username=:username");
-        query.setParameter("username", username);
+        Query query = session.createQuery("FROM User WHERE name=:name");
+        query.setParameter("name", name);
 
         User user = (User) query.uniqueResult();
 
         if (user == null) {
-            user = new User(username, password);
-            user.authenticate();
-
             // TODO: 04.01.16 Нужно генерировать кириллическое имя для персонажа
-            Person person = new Person(username, user);
+            user = new User(name, password);
+            user.authenticate();
 
             Transaction transaction = session.beginTransaction();
             session.persist(user);
-            session.persist(person);
             transaction.commit();
         } else {
             if (!user.isPasswordValid(password)) {
@@ -47,7 +43,7 @@ public class UserService
             }
         }
 
-        System.out.printf("[+] %s зашел в игру.%n", user.getUsername());
+        System.out.printf("[+] %s зашел в игру.%n", user.getName());
 
         return user;
     }
