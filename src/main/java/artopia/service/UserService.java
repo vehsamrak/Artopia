@@ -22,7 +22,7 @@ public class UserService
 
     public User login(String name, String password) throws EmptyPassword, EmptyUsername, WrongPassword
     {
-        Session session = this.databaseService.getSession();
+        Session session = this.databaseService.openSession();
 
         Query query = session.createQuery("FROM User WHERE name=:name");
         query.setParameter("name", name);

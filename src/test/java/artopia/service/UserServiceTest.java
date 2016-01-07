@@ -41,7 +41,7 @@ public class UserServiceTest extends Assert
         User mockedUser = createUser();
         Query mockedQuery = createQuery(mockedUser);
         Session mockedSession = createSession(mockedQuery);
-        when(databaseService.getSession()).thenReturn(mockedSession);
+        when(databaseService.openSession()).thenReturn(mockedSession);
 
         return new UserService(databaseService);
     }

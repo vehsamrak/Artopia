@@ -1,7 +1,6 @@
 package artopia.service;
 
 import org.hibernate.Session;
-import org.hibernate.SessionException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -13,14 +12,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class DatabaseService
 
 {
-    private Session session = null;
     private SessionFactory sessionFactory = null;
 
-    public DatabaseService() {
+    public DatabaseService()
+    {
         this.openSession();
+        this.sessionFactory = createSessionFactory();
     }
 
-    private SessionFactory createSessionFactory() {
+    private SessionFactory createSessionFactory()
+    {
         // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
@@ -33,27 +34,8 @@ public class DatabaseService
         }
     }
 
-    public Session openSession() {
-        if (this.sessionFactory == null) {
-            this.sessionFactory = createSessionFactory();
-        }
-
+    public Session openSession()
+    {
         return this.sessionFactory.openSession();
-    }
-
-    public void close() {
-        this.session.close();
-    }
-
-    public Session getSession() throws SessionException {
-        if (this.session == null) {
-            this.session = openSession();
-        }
-
-        if (this.session == null) {
-            throw new SessionException("Session was not opened.");
-        }
-
-        return this.session;
     }
 }
