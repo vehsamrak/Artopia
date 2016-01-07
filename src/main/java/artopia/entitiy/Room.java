@@ -15,13 +15,6 @@ public class Room
     private String up;
     private String down;
 
-    public Room(String id, String name, String desciption)
-    {
-        this.id = id;
-        this.name = name;
-        this.desciption = desciption;
-    }
-
     public Room(
             String id,
             String name,
@@ -48,75 +41,5 @@ public class Room
     public String getId()
     {
         return id;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public String getDesciption()
-    {
-        return desciption;
-    }
-
-    public String getNorth()
-    {
-        return north;
-    }
-
-    public void setNorth(String roomId)
-    {
-        this.north = roomId;
-    }
-
-    public String getSouth()
-    {
-        return south;
-    }
-
-    public void setSouth(String roomId)
-    {
-        this.south = roomId;
-    }
-
-    public String getEast()
-    {
-        return east;
-    }
-
-    public void setEast(String roomId)
-    {
-        this.east = roomId;
-    }
-
-    public String getWest()
-    {
-        return west;
-    }
-
-    public void setWest(String roomId)
-    {
-        this.west = roomId;
-    }
-
-    public String getUp()
-    {
-        return up;
-    }
-
-    public void setUp(String roomId)
-    {
-        this.up = roomId;
-    }
-
-    public String getDown()
-    {
-        return down;
-    }
-
-    public void setDown(String roomId)
-    {
-        this.down = roomId;
     }
 }
