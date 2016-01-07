@@ -8,12 +8,12 @@ public class Room
     private String id;
     private String name;
     private String desciption;
-    private Room north;
-    private Room south;
-    private Room east;
-    private Room west;
-    private Room up;
-    private Room down;
+    private String north;
+    private String south;
+    private String east;
+    private String west;
+    private String up;
+    private String down;
 
     public Room(String id, String name, String desciption)
     {
@@ -22,63 +22,101 @@ public class Room
         this.desciption = desciption;
     }
 
-    public Room getNorth()
+    public Room(
+            String id,
+            String name,
+            String desciption,
+            String northId,
+            String eastId,
+            String southId,
+            String westId,
+            String upId,
+            String downId
+    )
+    {
+        this.id = id;
+        this.name = name;
+        this.desciption = desciption;
+        this.north = northId;
+        this.east = eastId;
+        this.south = southId;
+        this.west = westId;
+        this.up = upId;
+        this.down = downId;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDesciption()
+    {
+        return desciption;
+    }
+
+    public String getNorth()
     {
         return north;
     }
 
-    public void setNorth(Room room)
+    public void setNorth(String roomId)
     {
-        this.north = room;
+        this.north = roomId;
     }
 
-    public Room getSouth()
+    public String getSouth()
     {
         return south;
     }
 
-    public void setSouth(Room room)
+    public void setSouth(String roomId)
     {
-        this.south = room;
+        this.south = roomId;
     }
 
-    public Room getEast()
+    public String getEast()
     {
         return east;
     }
 
-    public void setEast(Room room)
+    public void setEast(String roomId)
     {
-        this.east = room;
+        this.east = roomId;
     }
 
-    public Room getWest()
+    public String getWest()
     {
         return west;
     }
 
-    public void setWest(Room room)
+    public void setWest(String roomId)
     {
-        this.west = room;
+        this.west = roomId;
     }
 
-    public Room getUp()
+    public String getUp()
     {
         return up;
     }
 
-    public void setUp(Room room)
+    public void setUp(String roomId)
     {
-        this.up = room;
+        this.up = roomId;
     }
 
-    public Room getDown()
+    public String getDown()
     {
         return down;
     }
 
-    public void setDown(Room room)
+    public void setDown(String roomId)
     {
-        this.down = room;
+        this.down = roomId;
     }
 }
