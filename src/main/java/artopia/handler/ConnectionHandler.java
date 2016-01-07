@@ -59,7 +59,7 @@ public class ConnectionHandler implements Runnable
 
                 this.socketOutput.printf("Добро пожаловать, %s!%n", user.getName());
 
-                CommandService commandService = new CommandService(user, databaseService);
+                CommandService commandService = new CommandService(user, this.databaseService);
 
                 while (true) {
                     this.socketOutput.println("Введите команду:");
