@@ -43,6 +43,8 @@ public class UserService
             }
         }
 
+        session.close();
+
         System.out.printf("[+] %s зашел в игру.%n", user.getName());
 
         return user;
