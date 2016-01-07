@@ -23,7 +23,7 @@ public class RoomRepositoryTest extends Assert
     public void findById_repositoryWithAskedRoomId_returnsRoom()
     {
         RoomRepository roomRepository = new RoomRepository();
-        Room testRoom1 = roomRepository.findById("test-room-1");
+        Room testRoom1 = roomRepository.findById("system-start");
 
         assertNotNull(testRoom1);
     }
