@@ -54,7 +54,7 @@ public class Person
     private Date createdAt = new Date();
 
     @Column(name = "room_id")
-    private String roomId;
+    private String roomId = "system-start";
 
     public Person() {}
 
