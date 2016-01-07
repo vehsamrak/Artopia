@@ -1,6 +1,7 @@
 package artopia.command;
 
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.command.CommandResult;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class ExitCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsResponseWithLeaveMessageAndExitSubcommand()
     {
-        CommandResult commandResult = new ExitCommand().execute(mock(User.class));
+        CommandResult commandResult = new ExitCommand().execute(mock(User.class), mock(DatabaseService.class));
         ArrayList<String> subCommands = commandResult.getSubCommands();
 
         assertFalse(commandResult.haveErrors());

@@ -2,6 +2,7 @@ package artopia.service.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
@@ -13,11 +14,13 @@ public class CommandService
 {
 
     private final User user;
+    private final DatabaseService databaseService;
     private final CommandRepository commandRepository;
 
-    public CommandService(User user)
+    public CommandService(User user, DatabaseService databaseService)
     {
         this.user = user;
+        this.databaseService = databaseService;
         this.commandRepository = new CommandRepository();
     }
 
@@ -33,7 +36,7 @@ public class CommandService
             return this.createCommandResultWithError(command, new CommandNotFound());
         }
 
-        return commandObject.execute(this.user);
+        return commandObject.execute(this.user, this.databaseService);
     }
 
     private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError)

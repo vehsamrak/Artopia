@@ -17,8 +17,8 @@ public class Main {
         int port = 9000;
 
         System.out.println("Запуск сессии для работы с базой данных ...");
-
-        UserService userService = new UserService(new DatabaseService());
+        DatabaseService databaseService = new DatabaseService();
+        UserService userService = new UserService(databaseService);
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -31,7 +31,14 @@ public class Main {
                 BufferedReader socketInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter socketOutput = new PrintWriter(socket.getOutputStream(), true);
 
-                Runnable connectionHandler = new ConnectionHandler(socket, socketInput, socketOutput, userService);
+                Runnable connectionHandler = new ConnectionHandler(
+                        socket,
+                        socketInput,
+                        socketOutput,
+                        userService,
+                        databaseService
+                );
+
                 new Thread(connectionHandler).start();
 
             }

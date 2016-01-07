@@ -1,6 +1,7 @@
 package artopia.command.infrastructure;
 
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.command.CommandResult;
 
 /**
@@ -8,5 +9,5 @@ import artopia.service.command.CommandResult;
  */
 interface Executable
 {
-    CommandResult execute(User user);
+    CommandResult execute(User user, DatabaseService databaseService);
 }

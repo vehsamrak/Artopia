@@ -4,6 +4,7 @@ import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -112,12 +113,24 @@ public class ConnectionHandlerTest extends Assert
             Exception exception
     ) throws Exception
     {
-        return new ConnectionHandler(this.createSocket(), socketInput, socketOutput, this.createUserServiceThatThrowsException(exception));
+        return new ConnectionHandler(
+                this.createSocket(),
+                socketInput,
+                socketOutput,
+                this.createUserServiceThatThrowsException(exception),
+                mock(DatabaseService.class)
+        );
     }
 
     private ConnectionHandler createConnectionHandler(BufferedReader socketInput, PrintWriter socketOutput, User user) throws Exception
     {
-        return new ConnectionHandler(this.createSocket(), socketInput, socketOutput, this.createUserServiceWithUser(user));
+        return new ConnectionHandler(
+                this.createSocket(),
+                socketInput,
+                socketOutput,
+                this.createUserServiceWithUser(user),
+                mock(DatabaseService.class)
+        );
     }
 
     private PrintWriter createSocketOutput()

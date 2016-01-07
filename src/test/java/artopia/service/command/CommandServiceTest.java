@@ -1,6 +1,7 @@
 package artopia.service.command;
 
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
 import org.junit.Assert;
@@ -49,6 +50,6 @@ public class CommandServiceTest extends Assert
 
     private CommandService createCommandService()
     {
-        return new CommandService(mock(User.class));
+        return new CommandService(mock(User.class), mock(DatabaseService.class));
     }
 }

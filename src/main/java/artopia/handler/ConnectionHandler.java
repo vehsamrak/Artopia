@@ -4,6 +4,7 @@ import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
 import artopia.entitiy.User;
+import artopia.service.DatabaseService;
 import artopia.service.UserService;
 import artopia.service.command.CommandResult;
 import artopia.service.command.CommandService;
@@ -19,16 +20,23 @@ import java.net.Socket;
 public class ConnectionHandler implements Runnable
 {
     private final PrintWriter socketOutput;
+    private final DatabaseService databaseService;
     private final Socket socket;
     private final BufferedReader socketInput;
     private final String clientHostName;
     private final UserService userService;
 
-    public ConnectionHandler(Socket socket, BufferedReader socketInput, PrintWriter socketOutput, UserService userService)
-    {
+    public ConnectionHandler(
+            Socket socket,
+            BufferedReader socketInput,
+            PrintWriter socketOutput,
+            UserService userService,
+            DatabaseService databaseService
+    ) {
         this.socket = socket;
         this.socketInput = socketInput;
         this.socketOutput = socketOutput;
+        this.databaseService = databaseService;
         this.clientHostName = socket.getInetAddress().getCanonicalHostName();
         this.userService = userService;
     }
@@ -51,7 +59,7 @@ public class ConnectionHandler implements Runnable
 
                 this.socketOutput.printf("Добро пожаловать, %s!%n", user.getName());
 
-                CommandService commandService = new CommandService(user);
+                CommandService commandService = new CommandService(user, databaseService);
 
                 while (true) {
                     this.socketOutput.println("Введите команду:");
