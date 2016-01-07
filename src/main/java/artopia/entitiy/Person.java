@@ -53,6 +53,9 @@ public class Person
     @Column(name = "created_at")
     private Date createdAt = new Date();
 
+    @Column(name = "room_id")
+    private String roomId;
+
     public Person() {}
 
     public Person(String name, User user)
