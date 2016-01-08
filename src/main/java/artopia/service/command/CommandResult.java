@@ -14,6 +14,15 @@ public class CommandResult {
     private ArrayList<String> subCommands = new ArrayList<>();
 
     /**
+     * Команда без результата
+     * @param command команда
+     */
+    public CommandResult(String command)
+    {
+        this.command = command;
+    }
+
+    /**
      * Команда с результатом
      * @param command команда
      * @param result рузультат команды
