@@ -9,4 +9,5 @@
 /src/main/resources/hibernate.cfg.xml
 
 # Build artefacts
+/out
 /build
