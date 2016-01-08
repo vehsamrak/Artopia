@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author Vehsamrak
  */
 public class ServiceLocator
-
 {
     final private ArrayList<AbstractService> serviceList = new ArrayList<>();
 
