@@ -21,6 +21,14 @@ public class LookCommandTest extends Assert
     @Test
     public void execute_userWithRoom_returnsResponseContainingRoomNameAndDescription() throws ServiceNotFound
     {
+        CommandResult commandResult = new LookCommand().execute(this.createUser(), this.createServiceLocator());
+
+        assertFalse(commandResult.haveErrors());
+        assertEquals("Test room\nTest room description.", commandResult.toString());
+    }
+
+    private ServiceLocator createServiceLocator() throws ServiceNotFound
+    {
         Room room = this.createRoom();
 
         RoomRepository roomRepository = mock(RoomRepository.class);
@@ -29,10 +37,7 @@ public class LookCommandTest extends Assert
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
         when(serviceLocator.get("RoomRepository")).thenReturn(roomRepository);
 
-        CommandResult commandResult = new LookCommand().execute(this.createUser(), serviceLocator);
-
-        assertFalse(commandResult.haveErrors());
-        assertEquals("Test room\nTest room description.", commandResult.toString());
+        return serviceLocator;
     }
 
     private User createUser()
