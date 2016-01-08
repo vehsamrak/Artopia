@@ -52,4 +52,34 @@ public class Room
     {
         return this.description;
     }
+
+    public String getNorth()
+    {
+        return north;
+    }
+
+    public String getSouth()
+    {
+        return south;
+    }
+
+    public String getEast()
+    {
+        return east;
+    }
+
+    public String getWest()
+    {
+        return west;
+    }
+
+    public String getUp()
+    {
+        return up;
+    }
+
+    public String getDown()
+    {
+        return down;
+    }
 }
