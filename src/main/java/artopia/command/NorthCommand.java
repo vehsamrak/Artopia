@@ -31,7 +31,7 @@ public class NorthCommand extends AbstractCommand
         RoomRepository roomRepository = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
         Room currentRoom = roomRepository.findById(user.getRoomId());
 
-        if (currentRoom == null) {
+        if (currentRoom == null || currentRoom.getNorth() == null) {
             return createResultWithError(commandResult);
         }
 
