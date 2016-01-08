@@ -2,7 +2,6 @@ package artopia.service.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
-import artopia.exception.ServiceNotFound;
 import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
@@ -31,7 +30,7 @@ public class CommandService extends AbstractService
         this.user = user;
     }
 
-    public CommandResult execute(String command) throws ServiceNotFound
+    public CommandResult execute(String command) throws Exception
     {
         if (command.length() == 0) {
             return this.createCommandResultWithError(command, new CommandEmpty());

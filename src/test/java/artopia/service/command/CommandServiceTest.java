@@ -1,6 +1,5 @@
 package artopia.service.command;
 
-import artopia.exception.ServiceNotFound;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
 import artopia.service.locator.ServiceLocator;
@@ -16,7 +15,7 @@ public class CommandServiceTest extends Assert
 {
 
     @Test
-    public void execute_givenEmptyCommand_returnCommandResultWithEmptyCommandError() throws ServiceNotFound
+    public void execute_givenEmptyCommand_returnCommandResultWithEmptyCommandError() throws Exception
     {
         CommandService commandService = createCommandService();
 
@@ -27,7 +26,7 @@ public class CommandServiceTest extends Assert
     }
 
     @Test
-    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError() throws ServiceNotFound
+    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError() throws Exception
     {
         CommandService commandService = createCommandService();
 
@@ -38,7 +37,7 @@ public class CommandServiceTest extends Assert
     }
 
     @Test
-    public void execute_givenAuthorsCommand_returnCommandResultWithEqualCommandName() throws ServiceNotFound
+    public void execute_givenAuthorsCommand_returnCommandResultWithEqualCommandName() throws Exception
     {
         CommandService commandService = createCommandService();
 

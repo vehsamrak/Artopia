@@ -7,6 +7,7 @@ import artopia.service.command.CommandResult;
 import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,8 +25,13 @@ public class ExitCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsResponseWithLeaveMessageAndExitSubcommand() throws ServiceNotFound
     {
+        Transaction transaction = mock(Transaction.class);
+
+        Session session = mock(Session.class);
+        when(session.beginTransaction()).thenReturn(transaction);
+
         DatabaseService databaseServiceMock = mock(DatabaseService.class);
-        when(databaseServiceMock.openSession()).thenReturn(mock(Session.class));
+        when(databaseServiceMock.openSession()).thenReturn(session);
 
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
         when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseServiceMock);
