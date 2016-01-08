@@ -7,6 +7,7 @@ import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
 import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 
 /**
@@ -54,8 +55,8 @@ public class CommandService extends AbstractService
     }
 
     @Override
-    public String getName()
+    public Service getName()
     {
-        return "CommandService";
+        return Service.COMMAND;
     }
 }

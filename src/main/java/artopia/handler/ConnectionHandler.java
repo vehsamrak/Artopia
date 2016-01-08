@@ -7,6 +7,7 @@ import artopia.exception.WrongPassword;
 import artopia.service.UserService;
 import artopia.service.command.CommandResult;
 import artopia.service.command.CommandService;
+import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 
 import java.io.BufferedReader;
@@ -52,12 +53,12 @@ public class ConnectionHandler implements Runnable
             String password = this.socketInput.readLine();
 
             try {
-                UserService userService = (UserService) this.serviceLocator.get("UserService");
+                UserService userService = (UserService) this.serviceLocator.get(Service.USER);
                 User user = userService.login(name, password);
 
                 this.socketOutput.printf("Добро пожаловать, %s!%n", user.getName());
 
-                CommandService commandService = (CommandService) this.serviceLocator.get("CommandService");
+                CommandService commandService = (CommandService) this.serviceLocator.get(Service.COMMAND);
                 commandService.setUser(user);
 
                 while (true) {

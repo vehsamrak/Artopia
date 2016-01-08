@@ -5,6 +5,7 @@ import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
 import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -52,8 +53,8 @@ public class UserService extends AbstractService
     }
 
     @Override
-    public String getName()
+    public Service getName()
     {
-        return "UserService";
+        return Service.USER;
     }
 }

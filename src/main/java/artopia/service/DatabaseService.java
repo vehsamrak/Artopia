@@ -1,6 +1,7 @@
 package artopia.service;
 
 import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -39,8 +40,8 @@ public class DatabaseService extends AbstractService
     }
 
     @Override
-    public String getName()
+    public Service getName()
     {
-        return "DatabaseService";
+        return Service.DATABASE;
     }
 }

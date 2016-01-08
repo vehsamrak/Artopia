@@ -25,10 +25,10 @@ public class ServiceLocator
         this.serviceList.add(new RoomRepository());
     }
 
-    public AbstractService get(String serviceName) throws ServiceNotFound
+    public AbstractService get(Service serviceName) throws ServiceNotFound
     {
         for (AbstractService service : this.serviceList) {
-            if (service.getName().equals(serviceName)) {
+            if (service.getName() == serviceName) {
                 return service;
             }
         }

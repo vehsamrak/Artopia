@@ -4,6 +4,7 @@ import artopia.entitiy.Room;
 import artopia.entitiy.User;
 import artopia.exception.ServiceNotFound;
 import artopia.service.command.CommandResult;
+import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 import artopia.service.room.RoomRepository;
 import org.junit.Assert;
@@ -35,7 +36,7 @@ public class LookCommandTest extends Assert
         when(roomRepository.findById("test-room-id")).thenReturn(room);
 
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
-        when(serviceLocator.get("RoomRepository")).thenReturn(roomRepository);
+        when(serviceLocator.get(Service.ROOM_REPOSITORY)).thenReturn(roomRepository);
 
         return serviceLocator;
     }

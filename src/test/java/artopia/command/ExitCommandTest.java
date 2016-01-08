@@ -4,6 +4,7 @@ import artopia.entitiy.User;
 import artopia.exception.ServiceNotFound;
 import artopia.service.DatabaseService;
 import artopia.service.command.CommandResult;
+import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 import org.hibernate.Session;
 import org.junit.Assert;
@@ -27,7 +28,7 @@ public class ExitCommandTest extends Assert
         when(databaseServiceMock.openSession()).thenReturn(mock(Session.class));
 
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
-        when(serviceLocator.get("DatabaseService")).thenReturn(databaseServiceMock);
+        when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseServiceMock);
 
         CommandResult commandResult = new ExitCommand().execute(mock(User.class), serviceLocator);
         ArrayList<String> subCommands = commandResult.getSubCommands();

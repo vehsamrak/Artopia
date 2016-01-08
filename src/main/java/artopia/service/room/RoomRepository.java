@@ -2,6 +2,7 @@ package artopia.service.room;
 
 import artopia.entitiy.Room;
 import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 
 import java.util.ArrayList;
 
@@ -97,8 +98,8 @@ public class RoomRepository extends AbstractService
     }
 
     @Override
-    public String getName()
+    public Service getName()
     {
-        return "RoomRepository";
+        return Service.ROOM_REPOSITORY;
     }
 }

@@ -5,5 +5,5 @@ package artopia.service.locator;
  */
 public abstract class AbstractService
 {
-    public abstract String getName();
+    public abstract Service getName();
 }
