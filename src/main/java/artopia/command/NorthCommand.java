@@ -41,7 +41,7 @@ public class NorthCommand extends AbstractCommand
             return createResultWithError(commandResult);
         }
 
-        user.setRoomId("northern-room");
+        user.setRoomId(destinationRoom.getId());
 
         return commandResult;
     }

@@ -11,7 +11,6 @@ import artopia.service.room.RoomRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +30,7 @@ public class NorthCommandTest extends Assert
         northCommand.execute(user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
-        assertEquals("northern-room", user.getRoomId());
+        assertEquals("test-north", user.getRoomId());
     }
 
     private ServiceLocator createServiceLocator() throws ServiceNotFound
@@ -46,17 +45,42 @@ public class NorthCommandTest extends Assert
 
     private RoomRepository createRoomRepository()
     {
-        Room room = mock(Room.class);
-        when(room.getNorth()).thenReturn("test-northern");
+        Room centerRoom = new Room(
+                "test-center",
+                "Center",
+                "Center test room",
+                "test-north",
+                "test-east",
+                "test-south",
+                "test-west",
+                "test-up",
+                "test-down"
+        );
+
+        Room northRoom = new Room(
+                "test-north",
+                "North",
+                "Northern test room",
+                null,
+                null,
+                "test-center",
+                null,
+                null,
+                null
+        );
 
         RoomRepository roomRepository = mock(RoomRepository.class);
-        when(roomRepository.findById(anyString())).thenReturn(room);
+        when(roomRepository.findById("test-center")).thenReturn(centerRoom);
+        when(roomRepository.findById("test-north")).thenReturn(northRoom);
 
         return roomRepository;
     }
 
     private User createUser() throws EmptyPassword, EmptyUsername
     {
-        return new User("Tester", "password");
+        User user = new User("Tester", "password");
+        user.setRoomId("test-center");
+
+        return user;
     }
 }

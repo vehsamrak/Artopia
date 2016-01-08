@@ -4,6 +4,7 @@ import artopia.command.AuthorsCommand;
 import artopia.command.ExitCommand;
 import artopia.command.HelpCommand;
 import artopia.command.LookCommand;
+import artopia.command.NorthCommand;
 import artopia.command.infrastructure.AbstractCommand;
 
 import java.util.HashMap;
@@ -26,8 +27,9 @@ public class CommandRepository
     {
         this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
         this.commandList.put(new ExitCommand(), new String[]{"exit", "quit", "выход"});
-        this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
         this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
+        this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
+        this.commandList.put(new NorthCommand(), new String[]{"north", "север"});
     }
 
     /**
