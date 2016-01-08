@@ -1,12 +1,19 @@
 group 'rottenwood'
-version '0.0.2'
+version '0.0.3'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-repositories {
-    mavenCentral()
-    jcenter()
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Version': version,
+                'Main-Class': 'Main'
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 jacocoTestReport {
@@ -31,6 +38,13 @@ test {
 }
 
 check.dependsOn jacocoTestReport
+build.dependsOn fatJar
+
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
