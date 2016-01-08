@@ -125,4 +125,9 @@ public class User
     {
         return this.roomId;
     }
+
+    public void setRoomId(String roomId)
+    {
+        this.roomId = roomId;
+    }
 }
