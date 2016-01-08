@@ -15,12 +15,8 @@ public class Main {
     public static void main(String[] args) {
         int port = 9000;
 
-        System.out.println("Запуск сессии для работы с базой данных ...");
-
+        System.out.println("Инициализация приложения ...");
         ServiceLocator serviceLocator = new ServiceLocator();
-
-//        DatabaseService databaseService = new DatabaseService();
-//        UserService userService = new UserService(databaseService);
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
