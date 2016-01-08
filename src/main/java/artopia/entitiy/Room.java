@@ -7,7 +7,7 @@ public class Room
 {
     private String id;
     private String name;
-    private String desciption;
+    private String description;
     private String north;
     private String south;
     private String east;
@@ -18,7 +18,7 @@ public class Room
     public Room(
             String id,
             String name,
-            String desciption,
+            String description,
             String northId,
             String eastId,
             String southId,
@@ -29,7 +29,7 @@ public class Room
     {
         this.id = id;
         this.name = name;
-        this.desciption = desciption;
+        this.description = description;
         this.north = northId;
         this.east = eastId;
         this.south = southId;
@@ -40,6 +40,16 @@ public class Room
 
     public String getId()
     {
-        return id;
+        return this.id;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getDescription()
+    {
+        return this.description;
     }
 }

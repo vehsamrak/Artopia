@@ -4,6 +4,7 @@ import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
+import artopia.service.locator.AbstractService;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +12,7 @@ import org.hibernate.Transaction;
 /**
  * @author Rottenwood
  */
-public class UserService
+public class UserService extends AbstractService
 {
     private DatabaseService databaseService;
 
@@ -48,5 +49,11 @@ public class UserService
         System.out.printf("[+] %s зашел в игру.%n", user.getName());
 
         return user;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "UserService";
     }
 }

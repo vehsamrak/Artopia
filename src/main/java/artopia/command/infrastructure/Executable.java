@@ -1,13 +1,14 @@
 package artopia.command.infrastructure;
 
 import artopia.entitiy.User;
-import artopia.service.DatabaseService;
+import artopia.exception.ServiceNotFound;
 import artopia.service.command.CommandResult;
+import artopia.service.locator.ServiceLocator;
 
 /**
  * @author Rottenwood
  */
 interface Executable
 {
-    CommandResult execute(User user, DatabaseService databaseService);
+    CommandResult execute(User user, ServiceLocator serviceLocator) throws ServiceNotFound;
 }

@@ -1,9 +1,9 @@
 package artopia.service.command;
 
-import artopia.entitiy.User;
-import artopia.service.DatabaseService;
+import artopia.exception.ServiceNotFound;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
+import artopia.service.locator.ServiceLocator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class CommandServiceTest extends Assert
 {
 
     @Test
-    public void execute_givenEmptyCommand_returnCommandResultWithEmptyCommandError()
+    public void execute_givenEmptyCommand_returnCommandResultWithEmptyCommandError() throws ServiceNotFound
     {
         CommandService commandService = createCommandService();
 
@@ -27,7 +27,7 @@ public class CommandServiceTest extends Assert
     }
 
     @Test
-    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError()
+    public void execute_givenNonexistingCommand_returnCommandResultWithNoSuchCommandError() throws ServiceNotFound
     {
         CommandService commandService = createCommandService();
 
@@ -38,7 +38,7 @@ public class CommandServiceTest extends Assert
     }
 
     @Test
-    public void execute_givenAuthorsCommand_returnCommandResultWithEqualCommandName()
+    public void execute_givenAuthorsCommand_returnCommandResultWithEqualCommandName() throws ServiceNotFound
     {
         CommandService commandService = createCommandService();
 
@@ -50,6 +50,6 @@ public class CommandServiceTest extends Assert
 
     private CommandService createCommandService()
     {
-        return new CommandService(mock(User.class), mock(DatabaseService.class));
+        return new CommandService(mock(ServiceLocator.class));
     }
 }

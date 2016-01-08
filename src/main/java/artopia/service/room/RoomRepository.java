@@ -1,13 +1,14 @@
 package artopia.service.room;
 
 import artopia.entitiy.Room;
+import artopia.service.locator.AbstractService;
 
 import java.util.ArrayList;
 
 /**
  * @author Vehsamrak
  */
-public class RoomRepository
+public class RoomRepository extends AbstractService
 {
     final private ArrayList<Room> roomList = new ArrayList<>();
 
@@ -93,5 +94,11 @@ public class RoomRepository
         }
 
         return null;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "RoomRepository";
     }
 }

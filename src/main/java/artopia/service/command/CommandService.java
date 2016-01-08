@@ -2,29 +2,35 @@ package artopia.service.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
-import artopia.service.DatabaseService;
+import artopia.exception.ServiceNotFound;
 import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CommandEmpty;
 import artopia.service.command.errors.CommandNotFound;
+import artopia.service.locator.AbstractService;
+import artopia.service.locator.ServiceLocator;
 
 /**
  * @author Rottenwood
  */
-public class CommandService
+public class CommandService extends AbstractService
 {
 
-    private final User user;
-    private final DatabaseService databaseService;
+    private User user;
     private final CommandRepository commandRepository;
+    private final ServiceLocator serviceLocator;
 
-    public CommandService(User user, DatabaseService databaseService)
+    public CommandService(ServiceLocator serviceLocator)
     {
-        this.user = user;
-        this.databaseService = databaseService;
+        this.serviceLocator = serviceLocator;
         this.commandRepository = new CommandRepository();
     }
 
-    public CommandResult execute(String command)
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public CommandResult execute(String command) throws ServiceNotFound
     {
         if (command.length() == 0) {
             return this.createCommandResultWithError(command, new CommandEmpty());
@@ -36,7 +42,7 @@ public class CommandService
             return this.createCommandResultWithError(command, new CommandNotFound());
         }
 
-        return commandObject.execute(this.user, this.databaseService);
+        return commandObject.execute(this.user, this.serviceLocator);
     }
 
     private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError)
@@ -45,5 +51,11 @@ public class CommandService
         commandResult.addError(commandError);
 
         return commandResult;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "CommandService";
     }
 }

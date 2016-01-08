@@ -120,4 +120,9 @@ public class User
     {
         return DigestUtils.md5Hex(password);
     }
+
+    public String getRoomId()
+    {
+        return this.roomId;
+    }
 }

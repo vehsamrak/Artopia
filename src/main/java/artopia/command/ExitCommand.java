@@ -2,8 +2,10 @@ package artopia.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
+import artopia.exception.ServiceNotFound;
 import artopia.service.DatabaseService;
 import artopia.service.command.CommandResult;
+import artopia.service.locator.ServiceLocator;
 import org.hibernate.Session;
 
 /**
@@ -13,10 +15,12 @@ public class ExitCommand extends AbstractCommand
 {
 
     @Override
-    public CommandResult execute(User user, DatabaseService databaseService) {
+    public CommandResult execute(User user, ServiceLocator serviceLocator) throws ServiceNotFound
+    {
         CommandResult commandResult = new CommandResult("exit", "До встречи!");
         commandResult.addSubCommand("exit");
 
+        DatabaseService databaseService = (DatabaseService) serviceLocator.get("DatabaseService");
         Session session = databaseService.openSession();
         session.update(user);
 

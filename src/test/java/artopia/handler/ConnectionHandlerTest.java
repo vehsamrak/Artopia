@@ -6,6 +6,7 @@ import artopia.exception.WrongPassword;
 import artopia.entitiy.User;
 import artopia.service.DatabaseService;
 import artopia.service.UserService;
+import artopia.service.locator.ServiceLocator;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
@@ -118,9 +119,13 @@ public class ConnectionHandlerTest extends Assert
                 this.createSocket(),
                 socketInput,
                 socketOutput,
-                this.createUserServiceThatThrowsException(exception),
-                this.createDatabaseService()
+                this.createServiceLocator()
         );
+    }
+
+    private ServiceLocator createServiceLocator()
+    {
+        return mock(ServiceLocator.class);
     }
 
     private DatabaseService createDatabaseService()
@@ -137,8 +142,7 @@ public class ConnectionHandlerTest extends Assert
                 this.createSocket(),
                 socketInput,
                 socketOutput,
-                this.createUserServiceWithUser(user),
-                this.createDatabaseService()
+                this.createServiceLocator()
         );
     }
 

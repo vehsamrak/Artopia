@@ -1,7 +1,6 @@
 import artopia.handler.ConnectionHandler;
 import artopia.handler.ExceptionHandler;
-import artopia.service.DatabaseService;
-import artopia.service.UserService;
+import artopia.service.locator.ServiceLocator;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,8 +16,11 @@ public class Main {
         int port = 9000;
 
         System.out.println("Запуск сессии для работы с базой данных ...");
-        DatabaseService databaseService = new DatabaseService();
-        UserService userService = new UserService(databaseService);
+
+        ServiceLocator serviceLocator = new ServiceLocator();
+
+//        DatabaseService databaseService = new DatabaseService();
+//        UserService userService = new UserService(databaseService);
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -35,8 +37,7 @@ public class Main {
                         socket,
                         socketInput,
                         socketOutput,
-                        userService,
-                        databaseService
+                        serviceLocator
                 );
 
                 new Thread(connectionHandler).start();

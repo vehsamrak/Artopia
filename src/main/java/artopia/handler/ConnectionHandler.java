@@ -1,13 +1,13 @@
 package artopia.handler;
 
+import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
-import artopia.entitiy.User;
-import artopia.service.DatabaseService;
 import artopia.service.UserService;
 import artopia.service.command.CommandResult;
 import artopia.service.command.CommandService;
+import artopia.service.locator.ServiceLocator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,25 +20,22 @@ import java.net.Socket;
 public class ConnectionHandler implements Runnable
 {
     private final PrintWriter socketOutput;
-    private final DatabaseService databaseService;
+    private final ServiceLocator serviceLocator;
     private final Socket socket;
     private final BufferedReader socketInput;
     private final String clientHostName;
-    private final UserService userService;
 
     public ConnectionHandler(
             Socket socket,
             BufferedReader socketInput,
             PrintWriter socketOutput,
-            UserService userService,
-            DatabaseService databaseService
+            ServiceLocator serviceLocator
     ) {
         this.socket = socket;
         this.socketInput = socketInput;
         this.socketOutput = socketOutput;
-        this.databaseService = databaseService;
+        this.serviceLocator = serviceLocator;
         this.clientHostName = socket.getInetAddress().getCanonicalHostName();
-        this.userService = userService;
     }
 
     @Override
@@ -55,11 +52,13 @@ public class ConnectionHandler implements Runnable
             String password = this.socketInput.readLine();
 
             try {
-                User user = this.userService.login(name, password);
+                UserService userService = (UserService) this.serviceLocator.get("UserService");
+                User user = userService.login(name, password);
 
                 this.socketOutput.printf("Добро пожаловать, %s!%n", user.getName());
 
-                CommandService commandService = new CommandService(user, this.databaseService);
+                CommandService commandService = (CommandService) this.serviceLocator.get("CommandService");
+                commandService.setUser(user);
 
                 while (true) {
                     this.socketOutput.println("Введите команду:");
@@ -81,7 +80,7 @@ public class ConnectionHandler implements Runnable
                 this.socketOutput.println("Неверный пароль!");
                 this.disconnect();
             }
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             this.socketOutput.println("Ошибка!");
             ExceptionHandler.handle(exception);
         }

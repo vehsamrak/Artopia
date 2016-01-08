@@ -1,5 +1,6 @@
 package artopia.service;
 
+import artopia.service.locator.AbstractService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -9,14 +10,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 /**
  * @author Vehsamrak
  */
-public class DatabaseService
-
+public class DatabaseService extends AbstractService
 {
     private SessionFactory sessionFactory = null;
 
     public DatabaseService()
     {
-        this.openSession();
         this.sessionFactory = createSessionFactory();
     }
 
@@ -37,5 +36,11 @@ public class DatabaseService
     public Session openSession()
     {
         return this.sessionFactory.openSession();
+    }
+
+    @Override
+    public String getName()
+    {
+        return "DatabaseService";
     }
 }

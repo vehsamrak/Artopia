@@ -2,9 +2,9 @@ package artopia.command;
 
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
-import artopia.service.DatabaseService;
 import artopia.service.command.CommandRepository;
 import artopia.service.command.CommandResult;
+import artopia.service.locator.ServiceLocator;
 
 /**
  * @author Rottenwood
@@ -12,7 +12,7 @@ import artopia.service.command.CommandResult;
 public class HelpCommand extends AbstractCommand
 {
     @Override
-    public CommandResult execute(User user, DatabaseService databaseService) {
+    public CommandResult execute(User user, ServiceLocator serviceLocator) {
         // TODO: 03.01.16 Нужно запрашивать CommandRepository из DI, когда он появится
         return new CommandResult("help", new CommandRepository().getDescriptions());
     }
