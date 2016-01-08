@@ -45,11 +45,11 @@ public class ConnectionHandler implements Runnable
         System.out.printf("[>] Новое подключение! (%s)%n", this.clientHostName);
 
         try {
-            this.socketOutput.println("Добро пожаловать в JavaMud!");
-            this.socketOutput.println("Введите имя персонажа: ");
+            this.socketOutput.println("Добро пожаловать в Artopia MUD!");
+            this.socketOutput.println("Имя персонажа: ");
             String name = this.socketInput.readLine();
 
-            this.socketOutput.println("Введите пароль: ");
+            this.socketOutput.println("Пароль: ");
             String password = this.socketInput.readLine();
 
             try {
@@ -62,7 +62,7 @@ public class ConnectionHandler implements Runnable
                 commandService.setUser(user);
 
                 while (true) {
-                    this.socketOutput.println("Введите команду:");
+                    this.socketOutput.println("Введи команду:");
                     String command = this.socketInput.readLine();
 
                     CommandResult commandResult = commandService.execute(command);

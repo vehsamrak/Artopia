@@ -26,7 +26,7 @@ public class RoomRepository extends AbstractService
                 "system-north",
                 "system-east",
                 "system-south",
-                "system-east",
+                "system-west",
                 "system-up",
                 "system-down"
         ));

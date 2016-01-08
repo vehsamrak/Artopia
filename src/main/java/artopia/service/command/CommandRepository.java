@@ -1,11 +1,15 @@
 package artopia.service.command;
 
 import artopia.command.AuthorsCommand;
+import artopia.command.DownCommand;
+import artopia.command.EastCommand;
 import artopia.command.ExitCommand;
 import artopia.command.HelpCommand;
 import artopia.command.LookCommand;
 import artopia.command.NorthCommand;
 import artopia.command.SouthCommand;
+import artopia.command.UpCommand;
+import artopia.command.WestCommand;
 import artopia.command.infrastructure.AbstractCommand;
 
 import java.util.HashMap;
@@ -27,11 +31,15 @@ public class CommandRepository
     public CommandRepository()
     {
         this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
-        this.commandList.put(new ExitCommand(), new String[]{"exit", "quit", "выход"});
+        this.commandList.put(new ExitCommand(), new String[]{"quit", "конец", "выход"});
         this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
         this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
         this.commandList.put(new NorthCommand(), new String[]{"north", "север"});
         this.commandList.put(new SouthCommand(), new String[]{"south", "юг"});
+        this.commandList.put(new EastCommand(), new String[]{"east", "восток"});
+        this.commandList.put(new WestCommand(), new String[]{"west", "запад"});
+        this.commandList.put(new UpCommand(), new String[]{"up", "вверх"});
+        this.commandList.put(new DownCommand(), new String[]{"down", "вниз"});
     }
 
     /**
@@ -92,7 +100,7 @@ public class CommandRepository
 
     /**
      * Метод сравнения для списка команд. Сравнение по первой букве первого алиаса
-     * @param firstCommand Первая команда и ее алиасы
+     * @param firstCommand  Первая команда и ее алиасы
      * @param secondCommand Команда и алиасы для сравнения
      * @return Соотношение в числовом виде
      */
