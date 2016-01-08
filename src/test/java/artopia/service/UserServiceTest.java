@@ -1,6 +1,8 @@
 package artopia.service;
 
 import artopia.entitiy.User;
+import artopia.exception.EmptyPassword;
+import artopia.exception.EmptyUsername;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.junit.Assert;
@@ -35,7 +37,7 @@ public class UserServiceTest extends Assert
         assertTrue(user.isAuthenticated());
     }
 
-    private UserService createUserServiceWithUserTester()
+    private UserService createUserServiceWithUserTester() throws EmptyPassword, EmptyUsername
     {
         DatabaseService databaseService = mock(DatabaseService.class);
         User mockedUser = createUser();
@@ -62,13 +64,11 @@ public class UserServiceTest extends Assert
         return mockedQuery;
     }
 
-    private User createUser()
+    private User createUser() throws EmptyPassword, EmptyUsername
     {
-        User mockedUser = mock(User.class);
-        when(mockedUser.isAuthenticated()).thenReturn(true);
-        when(mockedUser.isPasswordValid(anyString())).thenReturn(true);
-        when(mockedUser.getName()).thenReturn("Tester");
+        User user = new User("Tester", "password");
+        user.authenticate();
 
-        return mockedUser;
+        return user;
     }
 }
