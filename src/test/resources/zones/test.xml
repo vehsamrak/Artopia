@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<zone>
+    <name>test</name>
+    <description>Test zone</description>
+    <rooms>
+        <room>
+            <id>square</id>
+            <name>Test square</name>
+            <description>
+                Test square description.
+            </description>
+            <exits>
+                <south>crossroads</south>
+            </exits>
+        </room>
+
+        <room>
+            <id>crossroads</id>
+            <name>Test crossroads</name>
+            <description>
+                Test crossroads description.
+            </description>
+            <exits>
+                <north>square</north>
+            </exits>
+        </room>
+    </rooms>
+</zone>
