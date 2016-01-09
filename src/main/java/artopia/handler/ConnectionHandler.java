@@ -4,11 +4,14 @@ import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
+import artopia.service.DatabaseService;
 import artopia.service.UserService;
 import artopia.service.command.CommandResult;
 import artopia.service.command.CommandService;
 import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -71,6 +74,14 @@ public class ConnectionHandler implements Runnable
                     // TODO: 31.12.15 Реализовать для этой цели систему Event Listening
                     if (commandResult.haveSubCommands() && commandResult.getSubCommands().contains("exit")) {
                         this.disconnect();
+
+                        DatabaseService databaseService = (DatabaseService) serviceLocator.get(Service.DATABASE);
+                        Session session = databaseService.openSession();
+                        Transaction transaction = session.beginTransaction();
+                        session.update(user);
+                        transaction.commit();
+                        session.close();
+
                         return;
                     }
                 }

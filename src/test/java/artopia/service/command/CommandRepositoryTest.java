@@ -52,7 +52,7 @@ public class CommandRepositoryTest extends Assert
 
         assertTrue(commandsDescription.startsWith("Игровые команды\n===============\n" +
                 "authors, credits, авторы - информация об авторах проекта\n"));
-        assertTrue(commandsDescription.contains("\nexit, quit, выход - выход из игры\n"));
+        assertTrue(commandsDescription.contains("\nquit, конец, выход - выход из игры\n"));
     }
 
     private CommandRepository createCommandRepository()

@@ -3,12 +3,8 @@ package artopia.command;
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
 import artopia.exception.ServiceNotFound;
-import artopia.service.DatabaseService;
 import artopia.service.command.CommandResult;
-import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  * @author Rottenwood
@@ -21,13 +17,6 @@ public class ExitCommand extends AbstractCommand
     {
         CommandResult commandResult = new CommandResult("exit", "До встречи!");
         commandResult.addSubCommand("exit");
-
-        DatabaseService databaseService = (DatabaseService) serviceLocator.get(Service.DATABASE);
-        Session session = databaseService.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
 
         return commandResult;
     }

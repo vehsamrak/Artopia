@@ -1,11 +1,10 @@
 group 'rottenwood'
-version '0.0.4'
+version '0.0.5'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-//create a single Jar with all dependencies
-task fatJar(type: Jar) {
+task singleJarWithDependencies(type: Jar) {
     manifest {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Version': version,
@@ -38,7 +37,7 @@ test {
 }
 
 check.dependsOn jacocoTestReport
-build.dependsOn fatJar
+build.dependsOn singleJarWithDependencies
 
 
 repositories {
