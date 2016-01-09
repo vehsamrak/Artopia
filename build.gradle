@@ -54,4 +54,5 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.31'
     compile 'javax.transaction:jta:1.1'
     compile 'commons-codec:commons-codec:1.10'
+    compile 'org.jdom:jdom:2.0.2'
 }
