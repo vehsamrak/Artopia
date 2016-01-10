@@ -4,6 +4,7 @@ import artopia.command.infrastructure.AbstractCommand;
 import artopia.entitiy.User;
 import artopia.entitiy.room.Exit;
 import artopia.entitiy.room.Room;
+import artopia.exception.UndefinedDirection;
 import artopia.service.command.CommandResult;
 import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CannotMoveThere;
@@ -55,7 +56,7 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
         return commandResult;
     }
 
-    private Exit getDestinationExit(User user, RoomRepository roomRepository, Direction direction) throws Exception
+    private Exit getDestinationExit(User user, RoomRepository roomRepository, Direction direction) throws UndefinedDirection
     {
         Room currentRoom = roomRepository.findById(user.getRoomId());
 
@@ -63,24 +64,6 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
             return null;
         }
 
-        Exit exit;
-
-        if (direction.equals(Direction.NORTH)) {
-            exit = currentRoom.getNorth();
-        } else if (direction.equals(Direction.EAST)) {
-            exit = currentRoom.getEast();
-        } else if (direction.equals(Direction.SOUTH)) {
-            exit = currentRoom.getSouth();
-        } else if (direction.equals(Direction.WEST)) {
-            exit = currentRoom.getWest();
-        } else if (direction.equals(Direction.UP)) {
-            exit = currentRoom.getUp();
-        } else if (direction.equals(Direction.DOWN)) {
-            exit = currentRoom.getDown();
-        } else {
-            throw new Exception("Undefined direction");
-        }
-
-        return exit;
+        return currentRoom.getExitByDirection(direction);
     }
 }

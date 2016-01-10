@@ -1,5 +1,8 @@
 package artopia.entitiy.room;
 
+import artopia.command.infrastructure.move.Direction;
+import artopia.exception.UndefinedDirection;
+
 /**
  * @author Vehsamrak
  */
@@ -55,31 +58,54 @@ public class Room
 
     public Exit getNorth()
     {
-        return north;
+        return this.north;
     }
 
     public Exit getSouth()
     {
-        return south;
+        return this.south;
     }
 
     public Exit getEast()
     {
-        return east;
+        return this.east;
     }
 
     public Exit getWest()
     {
-        return west;
+        return this.west;
     }
 
     public Exit getUp()
     {
-        return up;
+        return this.up;
     }
 
     public Exit getDown()
     {
-        return down;
+        return this.down;
+    }
+
+    public Exit getExitByDirection(Direction direction) throws UndefinedDirection
+    {
+        Exit exit;
+
+        if (direction.equals(Direction.NORTH)) {
+            exit = this.getNorth();
+        } else if (direction.equals(Direction.EAST)) {
+            exit = this.getEast();
+        } else if (direction.equals(Direction.SOUTH)) {
+            exit = this.getSouth();
+        } else if (direction.equals(Direction.WEST)) {
+            exit = this.getWest();
+        } else if (direction.equals(Direction.UP)) {
+            exit = this.getUp();
+        } else if (direction.equals(Direction.DOWN)) {
+            exit = this.getDown();
+        } else {
+            throw new UndefinedDirection();
+        }
+
+        return exit;
     }
 }
