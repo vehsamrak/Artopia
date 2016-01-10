@@ -2,6 +2,8 @@ package artopia.service.room;
 
 import artopia.entitiy.Room;
 import artopia.handler.ExceptionHandler;
+import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * @author Vehsamrak
  */
-public class RoomParser
+public class RoomParser extends AbstractService
 {
     private ArrayList<Room> roomList = new ArrayList<>();
 
@@ -33,15 +35,15 @@ public class RoomParser
 
                 this.roomList.add(
                         new Room(
-                                roomElement.getChildText("id"),
-                                roomElement.getChildText("name"),
-                                roomElement.getChildText("description"),
-                                roomExits.getChildText("north"),
-                                roomExits.getChildText("east"),
-                                roomExits.getChildText("south"),
-                                roomExits.getChildText("west"),
-                                roomExits.getChildText("up"),
-                                roomExits.getChildText("down")
+                                roomElement.getChildTextNormalize("id"),
+                                roomElement.getChildTextNormalize("name"),
+                                roomElement.getChildTextNormalize("description"),
+                                roomExits.getChildTextNormalize("north"),
+                                roomExits.getChildTextNormalize("east"),
+                                roomExits.getChildTextNormalize("south"),
+                                roomExits.getChildTextNormalize("west"),
+                                roomExits.getChildTextNormalize("up"),
+                                roomExits.getChildTextNormalize("down")
                         )
                 );
             }
@@ -50,5 +52,11 @@ public class RoomParser
         }
 
         return this.roomList;
+    }
+
+    @Override
+    public Service getName()
+    {
+        return Service.ROOM_PARSER;
     }
 }
