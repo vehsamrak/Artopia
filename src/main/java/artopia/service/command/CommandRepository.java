@@ -3,7 +3,7 @@ package artopia.service.command;
 import artopia.command.AuthorsCommand;
 import artopia.command.DownCommand;
 import artopia.command.EastCommand;
-import artopia.command.ExitCommand;
+import artopia.command.QuitCommand;
 import artopia.command.HelpCommand;
 import artopia.command.LookCommand;
 import artopia.command.NorthCommand;
@@ -32,7 +32,7 @@ public class CommandRepository
     public CommandRepository()
     {
         this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
-        this.commandList.put(new ExitCommand(), new String[]{"quit", "конец", "выход"});
+        this.commandList.put(new QuitCommand(), new String[]{"quit", "конец", "выход"});
         this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
         this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
         this.commandList.put(new NorthCommand(), new String[]{"north", "север"});

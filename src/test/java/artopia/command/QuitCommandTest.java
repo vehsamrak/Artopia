@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author Vehsamrak
  */
-public class ExitCommandTest extends Assert
+public class QuitCommandTest extends Assert
 {
 
     @Test
@@ -37,7 +37,7 @@ public class ExitCommandTest extends Assert
         when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseServiceMock);
 
         String[] arguments = {};
-        CommandResult commandResult = new ExitCommand().execute(arguments, mock(User.class), serviceLocator);
+        CommandResult commandResult = new QuitCommand().execute(arguments, mock(User.class), serviceLocator);
         ArrayList<String> subCommands = commandResult.getSubCommands();
 
         assertFalse(commandResult.haveErrors());

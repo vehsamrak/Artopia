@@ -9,7 +9,7 @@ import artopia.service.locator.ServiceLocator;
 /**
  * @author Rottenwood
  */
-public class ExitCommand extends AbstractCommand
+public class QuitCommand extends AbstractCommand
 {
 
     @Override

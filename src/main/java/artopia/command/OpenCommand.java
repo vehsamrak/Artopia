@@ -46,9 +46,7 @@ public class OpenCommand extends AbstractCommand
     ) throws Exception
     {
         RoomRepository roomRepository = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
-
         Room currentRoom = roomRepository.findById(user.getRoomId());
-
         Direction direction = this.findDirectionByFirstLetters(arguments[0]);
 
         if (direction == null) {
