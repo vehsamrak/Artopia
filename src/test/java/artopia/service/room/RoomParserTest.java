@@ -27,8 +27,8 @@ public class RoomParserTest extends Assert
 
         assertEquals(3, roomList.size());
         assertEquals("square", eastExit.getRoomId());
-        assertEquals("door", eastExit.getDoorName());
-        assertEquals("closed door", westExit.getDoorName());
+        assertEquals("door", eastExit.getDoorMessage());
+        assertEquals("closed door", westExit.getDoorMessage());
         assertTrue(eastExit.isClosed());
         assertFalse(westExit.isClosed());
     }

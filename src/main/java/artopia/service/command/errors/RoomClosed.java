@@ -5,16 +5,16 @@ package artopia.service.command.errors;
  */
 public class RoomClosed extends AbstractCommandError
 {
-    private String doorName;
+    private String doorMessage;
 
-    public RoomClosed(String doorName)
+    public RoomClosed(String doorMessage)
     {
-        this.doorName = doorName;
+        this.doorMessage = Character.toString(doorMessage.charAt(0)).toUpperCase() + doorMessage.substring(1);
     }
 
     @Override
     public String getErrorMessage()
     {
-        return "Ты не можешь пройти туда. " + this.doorName + " - закрыто.";
+        return "Ты не можешь пройти туда. " + this.doorMessage + ".";
     }
 }

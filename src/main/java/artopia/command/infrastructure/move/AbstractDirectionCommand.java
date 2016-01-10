@@ -5,7 +5,9 @@ import artopia.entitiy.User;
 import artopia.entitiy.room.Exit;
 import artopia.entitiy.room.Room;
 import artopia.service.command.CommandResult;
+import artopia.service.command.errors.AbstractCommandError;
 import artopia.service.command.errors.CannotMoveThere;
+import artopia.service.command.errors.RoomClosed;
 import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 import artopia.service.room.RoomRepository;
@@ -15,9 +17,9 @@ import artopia.service.room.RoomRepository;
  */
 abstract public class AbstractDirectionCommand extends AbstractCommand
 {
-    private CommandResult createResultWithError(CommandResult commandResult)
+    private CommandResult createResultWithError(CommandResult commandResult, AbstractCommandError error)
     {
-        commandResult.addError(new CannotMoveThere());
+        commandResult.addError(error);
 
         return commandResult;
     }
@@ -29,20 +31,31 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
     ) throws Exception
     {
         CommandResult commandResult = new CommandResult(direction.toString());
-
         RoomRepository roomRepository = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
-        Room destinationRoom = this.getDestinationRoom(user, roomRepository, direction);
+        Exit exit = this.getDestinationExit(user, roomRepository, direction);
 
-        if (destinationRoom == null) {
-            return createResultWithError(commandResult);
+        if (exit == null) {
+            return this.createResultWithError(commandResult, new CannotMoveThere());
         }
 
-        user.setRoomId(destinationRoom.getId());
+        if (exit.isClosed()) {
+            return this.createResultWithError(commandResult, new RoomClosed(exit.getDoorMessage()));
+        }
+
+        String destinationRoomId = exit.getRoomId();
+        Room destinationRoom = roomRepository.findById(destinationRoomId);
+
+        if (destinationRoom == null) {
+            // TODO: 10.01.16 Логировать ошибку зоны. Выход никуда не ведет
+            return this.createResultWithError(commandResult, new CannotMoveThere());
+        }
+
+        user.setRoomId(destinationRoomId);
 
         return commandResult;
     }
 
-    private Room getDestinationRoom(User user, RoomRepository roomRepository, Direction direction) throws Exception
+    private Exit getDestinationExit(User user, RoomRepository roomRepository, Direction direction) throws Exception
     {
         Room currentRoom = roomRepository.findById(user.getRoomId());
 
@@ -68,10 +81,6 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
             throw new Exception("Undefined direction");
         }
 
-        if (exit == null) {
-            return null;
-        }
-
-        return roomRepository.findById(exit.getRoomId());
+        return exit;
     }
 }

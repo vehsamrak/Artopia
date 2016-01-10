@@ -7,13 +7,13 @@ package artopia.entitiy.room;
 public class Exit
 {
     private String roomId;
-    private String doorName;
+    private String doorMessage;
     private boolean closed = false;
 
-    public Exit(String roomId, String doorName, boolean closed)
+    public Exit(String roomId, String doorMessage, boolean closed)
     {
         this.roomId = roomId;
-        this.doorName = doorName;
+        this.doorMessage = doorMessage;
         this.closed = closed;
     }
 
@@ -27,9 +27,9 @@ public class Exit
         return roomId;
     }
 
-    public String getDoorName()
+    public String getDoorMessage()
     {
-        return doorName;
+        return doorMessage;
     }
 
     public boolean isClosed()
