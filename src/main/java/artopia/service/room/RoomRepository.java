@@ -16,7 +16,6 @@ public class RoomRepository extends AbstractService
 
     /**
      * Список всех комнат
-     * TODO: 04.01.16 Должно быть вынесено в отдельный конфиг
      */
     public RoomRepository(RoomParser roomParser)
     {
