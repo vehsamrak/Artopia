@@ -3,15 +3,16 @@ package artopia.service.command;
 import artopia.command.AuthorsCommand;
 import artopia.command.DownCommand;
 import artopia.command.EastCommand;
-import artopia.command.QuitCommand;
 import artopia.command.HelpCommand;
 import artopia.command.LookCommand;
 import artopia.command.NorthCommand;
 import artopia.command.OpenCommand;
+import artopia.command.QuitCommand;
 import artopia.command.SouthCommand;
 import artopia.command.UpCommand;
 import artopia.command.WestCommand;
 import artopia.command.infrastructure.AbstractCommand;
+import artopia.command.CloseCommand;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,7 @@ public class CommandRepository
         this.commandList.put(new UpCommand(), new String[]{"up", "вверх"});
         this.commandList.put(new DownCommand(), new String[]{"down", "вниз"});
         this.commandList.put(new OpenCommand(), new String[]{"open", "открыть"});
+        this.commandList.put(new CloseCommand(), new String[]{"close", "закрыть"});
     }
 
     /**

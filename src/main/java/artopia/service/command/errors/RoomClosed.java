@@ -9,7 +9,11 @@ public class RoomClosed extends AbstractCommandError
 
     public RoomClosed(String doorMessage)
     {
-        this.doorMessage = Character.toString(doorMessage.charAt(0)).toUpperCase() + doorMessage.substring(1);
+        if (doorMessage == null) {
+            this.doorMessage = "Дверь закрыта";
+        } else {
+            this.doorMessage = Character.toString(doorMessage.charAt(0)).toUpperCase() + doorMessage.substring(1);
+        }
     }
 
     @Override

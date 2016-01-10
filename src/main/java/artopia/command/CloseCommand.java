@@ -7,19 +7,20 @@ import artopia.exception.ServiceNotFound;
 import artopia.exception.UndefinedDirection;
 import artopia.service.command.CommandResult;
 import artopia.service.command.errors.AbstractCommandError;
+import artopia.service.command.errors.AlreadyClosed;
 import artopia.service.command.errors.ArgumentMissing;
-import artopia.service.command.errors.OpenTargetNotFound;
+import artopia.service.command.errors.CloseTargetNotFound;
 import artopia.service.locator.ServiceLocator;
 
 /**
  * @author Vehsamrak
  */
-public class OpenCommand extends AbstractOpenCommand
+public class CloseCommand extends AbstractOpenCommand
 {
     @Override
     public String getDescription()
     {
-        return "открыть что-либо, будь то сундук или дверь";
+        return "закрыть дверь, сундук, etc";
     }
 
     @Override
@@ -28,20 +29,24 @@ public class OpenCommand extends AbstractOpenCommand
     ) throws ServiceNotFound, UndefinedDirection
     {
         if (arguments.length == 0) {
-            return this.createCommandResultWithError(new ArgumentMissing("Что именно открыть?"));
+            return this.createCommandResultWithError(new ArgumentMissing("Что именно закрыть?"));
         }
 
         Exit exit = super.getExit(arguments, user, serviceLocator);
 
-        if (exit == null || !exit.isClosed()) {
-            return this.createCommandResultWithError(new OpenTargetNotFound());
+        if (exit == null) {
+            return this.createCommandResultWithError(new CloseTargetNotFound());
         }
 
-        exit.open();
+        if (exit.isClosed()) {
+            return this.createCommandResultWithError(new AlreadyClosed());
+        }
+
+        exit.close();
 
         return new CommandResult(
-                "open",
-                "Ты открыл проход "
+                "close",
+                "Ты закрыл проход "
                         + super.getCyrillicDirectionString(super.findDirectionByFirstLetters(arguments[0]))
                         + "."
         );
@@ -49,7 +54,7 @@ public class OpenCommand extends AbstractOpenCommand
 
     private CommandResult createCommandResultWithError(AbstractCommandError error)
     {
-        CommandResult commandResult = new CommandResult("open");
+        CommandResult commandResult = new CommandResult("close");
         commandResult.addError(error);
 
         return commandResult;

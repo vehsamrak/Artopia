@@ -40,7 +40,15 @@ public class Exit
     public boolean open()
     {
         this.closed = false;
-        
+
         return true;
     }
+
+    public boolean close()
+    {
+        this.closed = true;
+
+        return true;
+    }
+
 }
