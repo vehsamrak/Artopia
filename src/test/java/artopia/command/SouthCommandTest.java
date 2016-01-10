@@ -28,7 +28,8 @@ public class SouthCommandTest extends Assert
         String currentRoomId = user.getRoomId();
 
         SouthCommand moveCommand = new SouthCommand();
-        moveCommand.execute(user, this.createServiceLocator());
+        String[] arguments = {};
+        moveCommand.execute(arguments, user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
         assertEquals("test-south", user.getRoomId());

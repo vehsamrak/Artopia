@@ -17,7 +17,8 @@ public class HelpCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsHelpMessage()
     {
-        CommandResult commandResult = new HelpCommand().execute(mock(User.class), mock(ServiceLocator.class));
+        String[] arguments = {};
+        CommandResult commandResult = new HelpCommand().execute(arguments, mock(User.class), mock(ServiceLocator.class));
 
         assertFalse(commandResult.haveErrors());
         assertEquals(commandResult.getCommandName(), "help");

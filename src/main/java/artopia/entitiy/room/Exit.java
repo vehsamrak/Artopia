@@ -24,16 +24,23 @@ public class Exit
 
     public String getRoomId()
     {
-        return roomId;
+        return this.roomId;
     }
 
     public String getDoorMessage()
     {
-        return doorMessage;
+        return this.doorMessage;
     }
 
     public boolean isClosed()
     {
-        return closed;
+        return this.closed;
+    }
+
+    public boolean open()
+    {
+        this.closed = false;
+        
+        return true;
     }
 }

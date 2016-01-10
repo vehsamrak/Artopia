@@ -16,7 +16,7 @@ public class LookCommand extends AbstractCommand
 {
 
     @Override
-    public CommandResult execute(User user, ServiceLocator serviceLocator) throws ServiceNotFound
+    public CommandResult execute(String[] arguments, User user, ServiceLocator serviceLocator) throws ServiceNotFound
     {
         RoomRepository roomService = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
         Room room = roomService.findById(user.getRoomId());

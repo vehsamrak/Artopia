@@ -13,7 +13,7 @@ public class ExitCommand extends AbstractCommand
 {
 
     @Override
-    public CommandResult execute(User user, ServiceLocator serviceLocator) throws ServiceNotFound
+    public CommandResult execute(String[] arguments, User user, ServiceLocator serviceLocator) throws ServiceNotFound
     {
         CommandResult commandResult = new CommandResult("exit", "До встречи!");
         commandResult.addSubCommand("exit");

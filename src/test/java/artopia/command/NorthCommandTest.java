@@ -28,7 +28,8 @@ public class NorthCommandTest extends Assert
         String currentRoomId = user.getRoomId();
 
         NorthCommand northCommand = new NorthCommand();
-        northCommand.execute(user, this.createServiceLocator());
+        String[] arguments = {};
+        northCommand.execute(arguments, user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
         assertEquals("test-north", user.getRoomId());

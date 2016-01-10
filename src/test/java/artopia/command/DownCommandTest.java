@@ -28,7 +28,8 @@ public class DownCommandTest extends Assert
         String currentRoomId = user.getRoomId();
 
         DownCommand moveCommand = new DownCommand();
-        moveCommand.execute(user, this.createServiceLocator());
+        String[] arguments = {};
+        moveCommand.execute(arguments, user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
         assertEquals("test-down", user.getRoomId());

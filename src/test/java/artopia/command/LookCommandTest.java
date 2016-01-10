@@ -22,7 +22,8 @@ public class LookCommandTest extends Assert
     @Test
     public void execute_userWithRoom_returnsResponseContainingRoomNameAndDescription() throws ServiceNotFound
     {
-        CommandResult commandResult = new LookCommand().execute(this.createUser(), this.createServiceLocator());
+        String[] arguments = {};
+        CommandResult commandResult = new LookCommand().execute(arguments, this.createUser(), this.createServiceLocator());
 
         assertFalse(commandResult.haveErrors());
         assertEquals("Test room\nTest room description.", commandResult.toString());

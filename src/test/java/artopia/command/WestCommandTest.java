@@ -28,7 +28,8 @@ public class WestCommandTest extends Assert
         String currentRoomId = user.getRoomId();
 
         WestCommand moveCommand = new WestCommand();
-        moveCommand.execute(user, this.createServiceLocator());
+        String[] arguments = {};
+        moveCommand.execute(arguments, user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
         assertEquals("test-west", user.getRoomId());

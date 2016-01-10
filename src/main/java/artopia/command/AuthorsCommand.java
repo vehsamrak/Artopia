@@ -12,7 +12,7 @@ public class AuthorsCommand extends AbstractCommand
 {
 
     @Override
-    public CommandResult execute(User user, ServiceLocator serviceLocator)
+    public CommandResult execute(String[] arguments, User user, ServiceLocator serviceLocator)
     {
         return new CommandResult("authors", "Автор проекта: Petr Karmashev (Vehsamrak)");
     }

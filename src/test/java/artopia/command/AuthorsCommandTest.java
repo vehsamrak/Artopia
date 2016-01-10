@@ -16,7 +16,8 @@ public class AuthorsCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsCommandResultWithAuthors()
     {
-        CommandResult commandResult = new AuthorsCommand().execute(mock(User.class), mock(ServiceLocator.class));
+        String[] arguments = {};
+        CommandResult commandResult = new AuthorsCommand().execute(arguments, mock(User.class), mock(ServiceLocator.class));
 
         assertFalse(commandResult.haveErrors());
         assertEquals("Автор проекта: Petr Karmashev (Vehsamrak)", commandResult.toString());

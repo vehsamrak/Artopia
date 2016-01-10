@@ -28,7 +28,8 @@ public class UpCommandTest extends Assert
         String currentRoomId = user.getRoomId();
 
         UpCommand moveCommand = new UpCommand();
-        moveCommand.execute(user, this.createServiceLocator());
+        String[] arguments = {};
+        moveCommand.execute(arguments, user, this.createServiceLocator());
 
         assertNotEquals(currentRoomId, user.getRoomId());
         assertEquals("test-up", user.getRoomId());

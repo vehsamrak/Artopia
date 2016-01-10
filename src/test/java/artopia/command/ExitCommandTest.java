@@ -36,7 +36,8 @@ public class ExitCommandTest extends Assert
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
         when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseServiceMock);
 
-        CommandResult commandResult = new ExitCommand().execute(mock(User.class), serviceLocator);
+        String[] arguments = {};
+        CommandResult commandResult = new ExitCommand().execute(arguments, mock(User.class), serviceLocator);
         ArrayList<String> subCommands = commandResult.getSubCommands();
 
         assertFalse(commandResult.haveErrors());

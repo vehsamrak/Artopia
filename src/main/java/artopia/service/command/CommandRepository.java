@@ -7,6 +7,7 @@ import artopia.command.ExitCommand;
 import artopia.command.HelpCommand;
 import artopia.command.LookCommand;
 import artopia.command.NorthCommand;
+import artopia.command.OpenCommand;
 import artopia.command.SouthCommand;
 import artopia.command.UpCommand;
 import artopia.command.WestCommand;
@@ -40,6 +41,7 @@ public class CommandRepository
         this.commandList.put(new WestCommand(), new String[]{"west", "запад"});
         this.commandList.put(new UpCommand(), new String[]{"up", "вверх"});
         this.commandList.put(new DownCommand(), new String[]{"down", "вниз"});
+        this.commandList.put(new OpenCommand(), new String[]{"open", "открыть"});
     }
 
     /**

@@ -12,7 +12,7 @@ import artopia.service.locator.ServiceLocator;
 public class HelpCommand extends AbstractCommand
 {
     @Override
-    public CommandResult execute(User user, ServiceLocator serviceLocator) {
+    public CommandResult execute(String[] arguments, User user, ServiceLocator serviceLocator) {
         // TODO: 03.01.16 Нужно запрашивать CommandRepository из DI, когда он появится
         return new CommandResult("help", new CommandRepository().getDescriptions());
     }

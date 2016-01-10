@@ -9,6 +9,8 @@ import artopia.service.locator.AbstractService;
 import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 
+import java.util.Arrays;
+
 /**
  * @author Rottenwood
  */
@@ -30,11 +32,15 @@ public class CommandService extends AbstractService
         this.user = user;
     }
 
-    public CommandResult execute(String command) throws Exception
+    public CommandResult execute(String fullCommand) throws Exception
     {
-        if (command.length() == 0) {
-            return this.createCommandResultWithError(command, new CommandEmpty());
+        if (fullCommand.length() == 0) {
+            return this.createCommandResultWithError(fullCommand, new CommandEmpty());
         }
+
+        String[] commandArray = fullCommand.split("\\s+");
+        String command = commandArray[0];
+        String[] arguments = Arrays.copyOfRange(commandArray, 1, commandArray.length);
 
         AbstractCommand commandObject = this.commandRepository.findByName(command);
 
@@ -42,7 +48,7 @@ public class CommandService extends AbstractService
             return this.createCommandResultWithError(command, new CommandNotFound());
         }
 
-        return commandObject.execute(this.user, this.serviceLocator);
+        return commandObject.execute(arguments, this.user, this.serviceLocator);
     }
 
     private CommandResult createCommandResultWithError(String command, AbstractCommandError commandError)

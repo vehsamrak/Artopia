@@ -9,5 +9,5 @@ import artopia.service.locator.ServiceLocator;
  */
 interface Executable
 {
-    CommandResult execute(User user, ServiceLocator serviceLocator) throws Exception;
+    CommandResult execute(String[] arguments, User user, ServiceLocator serviceLocator) throws Exception;
 }

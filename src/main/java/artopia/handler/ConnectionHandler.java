@@ -66,9 +66,9 @@ public class ConnectionHandler implements Runnable
 
                 while (true) {
                     this.socketOutput.println("Введи команду:");
-                    String command = this.socketInput.readLine();
+                    String fullCommand = this.socketInput.readLine();
 
-                    CommandResult commandResult = commandService.execute(command);
+                    CommandResult commandResult = commandService.execute(fullCommand);
                     this.socketOutput.printf("%s%n%n", commandResult.toString());
 
                     // TODO: 31.12.15 Реализовать для этой цели систему Event Listening

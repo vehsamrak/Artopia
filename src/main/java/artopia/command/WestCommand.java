@@ -19,7 +19,7 @@ public class WestCommand extends AbstractDirectionCommand
 
     @Override
     public CommandResult execute(
-            User user,
+            String[] arguments, User user,
             ServiceLocator serviceLocator
     ) throws Exception
     {
