@@ -2,8 +2,6 @@ package artopia.service.room;
 
 import artopia.entitiy.Room;
 import artopia.handler.ExceptionHandler;
-import artopia.service.locator.AbstractService;
-import artopia.service.locator.Service;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -17,7 +15,7 @@ import java.util.List;
 /**
  * @author Vehsamrak
  */
-public class RoomParser extends AbstractService
+public class RoomParser
 {
     private ArrayList<Room> roomList = new ArrayList<>();
 
@@ -52,11 +50,5 @@ public class RoomParser extends AbstractService
         }
 
         return this.roomList;
-    }
-
-    @Override
-    public Service getName()
-    {
-        return Service.ROOM_PARSER;
     }
 }
