@@ -39,7 +39,7 @@
                 </east>
                 <west>
                     <room>square</room>
-                    <door closed="false">door</door>
+                    <door closed="false">closed door</door>
                 </west>
             </exits>
         </room>
