@@ -1,6 +1,6 @@
 package artopia.service.room;
 
-import artopia.entitiy.Room;
+import artopia.entitiy.room.Room;
 import org.junit.Assert;
 import org.junit.Test;
 

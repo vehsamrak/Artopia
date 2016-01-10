@@ -1,7 +1,7 @@
 package artopia.command.infrastructure.move;
 
 import artopia.command.infrastructure.AbstractCommand;
-import artopia.entitiy.Room;
+import artopia.entitiy.room.Room;
 import artopia.entitiy.User;
 import artopia.service.command.CommandResult;
 import artopia.service.command.errors.CannotMoveThere;

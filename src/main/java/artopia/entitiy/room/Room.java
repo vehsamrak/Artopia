@@ -1,4 +1,4 @@
-package artopia.entitiy;
+package artopia.entitiy.room;
 
 /**
  * @author Vehsamrak

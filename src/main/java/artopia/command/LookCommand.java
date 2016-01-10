@@ -1,7 +1,7 @@
 package artopia.command;
 
 import artopia.command.infrastructure.AbstractCommand;
-import artopia.entitiy.Room;
+import artopia.entitiy.room.Room;
 import artopia.entitiy.User;
 import artopia.exception.ServiceNotFound;
 import artopia.service.command.CommandResult;

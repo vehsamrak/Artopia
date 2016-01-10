@@ -1,6 +1,6 @@
 package artopia.command;
 
-import artopia.entitiy.Room;
+import artopia.entitiy.room.Room;
 import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;

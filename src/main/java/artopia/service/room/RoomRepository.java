@@ -1,6 +1,6 @@
 package artopia.service.room;
 
-import artopia.entitiy.Room;
+import artopia.entitiy.room.Room;
 import artopia.service.locator.AbstractService;
 import artopia.service.locator.Service;
 
