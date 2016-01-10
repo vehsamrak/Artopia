@@ -1,8 +1,9 @@
 package artopia.command.infrastructure.move;
 
 import artopia.command.infrastructure.AbstractCommand;
-import artopia.entitiy.room.Room;
 import artopia.entitiy.User;
+import artopia.entitiy.room.Exit;
+import artopia.entitiy.room.Room;
 import artopia.service.command.CommandResult;
 import artopia.service.command.errors.CannotMoveThere;
 import artopia.service.locator.Service;
@@ -27,25 +28,7 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
             ServiceLocator serviceLocator
     ) throws Exception
     {
-        String directionString;
-
-        if (direction.equals(Direction.NORTH)) {
-            directionString = "north";
-        } else if (direction.equals(Direction.EAST)) {
-            directionString = "east";
-        } else if (direction.equals(Direction.SOUTH)) {
-            directionString = "south";
-        } else if (direction.equals(Direction.WEST)) {
-            directionString = "west";
-        } else if (direction.equals(Direction.UP)) {
-            directionString = "up";
-        } else if (direction.equals(Direction.DOWN)) {
-            directionString = "down";
-        } else {
-            throw new Exception("Undefined direction");
-        }
-
-        CommandResult commandResult = new CommandResult(directionString);
+        CommandResult commandResult = new CommandResult(direction.toString());
 
         RoomRepository roomRepository = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
         Room destinationRoom = this.getDestinationRoom(user, roomRepository, direction);
@@ -67,28 +50,28 @@ abstract public class AbstractDirectionCommand extends AbstractCommand
             return null;
         }
 
-        String directionId;
+        Exit exit;
 
         if (direction.equals(Direction.NORTH)) {
-            directionId = currentRoom.getNorth();
+            exit = currentRoom.getNorth();
         } else if (direction.equals(Direction.EAST)) {
-            directionId = currentRoom.getEast();
+            exit = currentRoom.getEast();
         } else if (direction.equals(Direction.SOUTH)) {
-            directionId = currentRoom.getSouth();
+            exit = currentRoom.getSouth();
         } else if (direction.equals(Direction.WEST)) {
-            directionId = currentRoom.getWest();
+            exit = currentRoom.getWest();
         } else if (direction.equals(Direction.UP)) {
-            directionId = currentRoom.getUp();
+            exit = currentRoom.getUp();
         } else if (direction.equals(Direction.DOWN)) {
-            directionId = currentRoom.getDown();
+            exit = currentRoom.getDown();
         } else {
             throw new Exception("Undefined direction");
         }
 
-        if (directionId == null) {
+        if (exit == null) {
             return null;
         }
 
-        return roomRepository.findById(directionId);
+        return roomRepository.findById(exit.getRoomId());
     }
 }

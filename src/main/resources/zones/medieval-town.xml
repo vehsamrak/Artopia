@@ -12,7 +12,10 @@
                 около которого горожане что-то бурно обсуждают. Улица отходит на север и юг.
             </description>
             <exits>
-                <north>street</north>
+                <north>
+                    <room>street</room>
+                    <door closed="false">дверь</door>
+                </north>
                 <east>arc</east>
                 <south>crossroads</south>
                 <west>market</west>

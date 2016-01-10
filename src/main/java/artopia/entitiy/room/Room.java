@@ -8,34 +8,34 @@ public class Room
     private String id;
     private String name;
     private String description;
-    private String north;
-    private String south;
-    private String east;
-    private String west;
-    private String up;
-    private String down;
+    private Exit north;
+    private Exit south;
+    private Exit east;
+    private Exit west;
+    private Exit up;
+    private Exit down;
 
     public Room(
             String id,
             String name,
             String description,
-            String northId,
-            String eastId,
-            String southId,
-            String westId,
-            String upId,
-            String downId
+            Exit northExit,
+            Exit eastExit,
+            Exit southExit,
+            Exit westExit,
+            Exit upExit,
+            Exit downExit
     )
     {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.north = northId;
-        this.east = eastId;
-        this.south = southId;
-        this.west = westId;
-        this.up = upId;
-        this.down = downId;
+        this.north = northExit;
+        this.east = eastExit;
+        this.south = southExit;
+        this.west = westExit;
+        this.up = upExit;
+        this.down = downExit;
     }
 
     public String getId()
@@ -53,32 +53,32 @@ public class Room
         return this.description;
     }
 
-    public String getNorth()
+    public Exit getNorth()
     {
         return north;
     }
 
-    public String getSouth()
+    public Exit getSouth()
     {
         return south;
     }
 
-    public String getEast()
+    public Exit getEast()
     {
         return east;
     }
 
-    public String getWest()
+    public Exit getWest()
     {
         return west;
     }
 
-    public String getUp()
+    public Exit getUp()
     {
         return up;
     }
 
-    public String getDown()
+    public Exit getDown()
     {
         return down;
     }

@@ -1,7 +1,11 @@
 package artopia.service.room;
 
+import artopia.command.infrastructure.move.Direction;
+import artopia.entitiy.room.Exit;
 import artopia.entitiy.room.Room;
 import artopia.handler.ExceptionHandler;
+import org.jdom2.Attribute;
+import org.jdom2.DataConversionException;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -10,6 +14,7 @@ import org.jdom2.input.SAXBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,18 +35,19 @@ public class RoomParser
 
             for (Element roomElement : rooms) {
                 Element roomExits = roomElement.getChildren("exits").get(0);
+                HashMap<Direction, Exit> exits = this.createExits(roomExits);
 
                 this.roomList.add(
                         new Room(
                                 roomElement.getChildTextNormalize("id"),
                                 roomElement.getChildTextNormalize("name"),
                                 roomElement.getChildTextNormalize("description"),
-                                roomExits.getChildTextNormalize("north"),
-                                roomExits.getChildTextNormalize("east"),
-                                roomExits.getChildTextNormalize("south"),
-                                roomExits.getChildTextNormalize("west"),
-                                roomExits.getChildTextNormalize("up"),
-                                roomExits.getChildTextNormalize("down")
+                                exits.get(Direction.NORTH),
+                                exits.get(Direction.EAST),
+                                exits.get(Direction.SOUTH),
+                                exits.get(Direction.WEST),
+                                exits.get(Direction.UP),
+                                exits.get(Direction.DOWN)
                         )
                 );
             }
@@ -50,5 +56,43 @@ public class RoomParser
         }
 
         return this.roomList;
+    }
+
+    private HashMap<Direction, Exit> createExits(Element roomExits) throws DataConversionException
+    {
+        HashMap<Direction, Exit> exitMap = new HashMap<>();
+
+        for (Direction direction : Direction.values()) {
+            Element exitElement = roomExits.getChild(direction.toString());
+
+            if (exitElement == null) {
+                continue;
+            }
+
+            if (exitElement.getChild("room") == null) {
+                String exitRoomId = exitElement.getTextNormalize();
+                exitMap.put(direction, new Exit(exitRoomId));
+            } else {
+                Element doorElement = exitElement.getChild("door");
+                String exitRoomId = exitElement.getChildTextNormalize("room");
+
+                if (doorElement == null) {
+                    exitMap.put(direction, new Exit(exitRoomId));
+                } else {
+                    String doorName = exitElement.getChildTextNormalize("door");
+
+                    Attribute doorClosedAttribute = doorElement.getAttribute("closed");
+
+                    boolean isClosed = true;
+                    if (doorClosedAttribute != null) {
+                        isClosed = doorClosedAttribute.getBooleanValue();
+                    }
+
+                    exitMap.put(direction, new Exit(exitRoomId, doorName, isClosed));
+                }
+            }
+        }
+
+        return exitMap;
     }
 }

@@ -11,6 +11,7 @@
             </description>
             <exits>
                 <south>crossroads</south>
+                <west>door</west>
             </exits>
         </room>
 
@@ -22,6 +23,24 @@
             </description>
             <exits>
                 <north>square</north>
+            </exits>
+        </room>
+
+        <room>
+            <id>door</id>
+            <name>Test door room</name>
+            <description>
+                Test door room description.
+            </description>
+            <exits>
+                <east>
+                    <room>square</room>
+                    <door>door</door>
+                </east>
+                <west>
+                    <room>square</room>
+                    <door closed="false">door</door>
+                </west>
             </exits>
         </room>
     </rooms>

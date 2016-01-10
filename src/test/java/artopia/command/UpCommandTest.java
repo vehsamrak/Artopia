@@ -1,5 +1,6 @@
 package artopia.command;
 
+import artopia.entitiy.room.Exit;
 import artopia.entitiy.room.Room;
 import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
@@ -49,12 +50,12 @@ public class UpCommandTest extends Assert
                 "test-center",
                 "Center",
                 "Center test room",
-                "test-north",
-                "test-east",
-                "test-south",
-                "test-west",
-                "test-up",
-                "test-down"
+                new Exit("test-north", null, false),
+                new Exit("test-east", null, false),
+                new Exit("test-south", null, false),
+                new Exit("test-west", null, false),
+                new Exit("test-up", null, false),
+                new Exit("test-down", null, false)
         );
 
         Room westRoom = new Room(
@@ -66,7 +67,7 @@ public class UpCommandTest extends Assert
                 null,
                 null,
                 null,
-                "test-center"
+                new Exit("test-center", null, false)
         );
 
         RoomRepository roomRepository = mock(RoomRepository.class);
