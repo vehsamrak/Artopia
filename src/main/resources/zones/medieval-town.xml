@@ -4,7 +4,7 @@
     <description>Средневековый город</description>
     <rooms>
         <room>
-            <id>square</id>
+            <id>system-start</id>
             <name>Городская площадь</name>
             <description>
                 Шумная городская площадь, жизнь на которой не затихает даже ночью. Западнее располагается рынок, а на
@@ -27,7 +27,7 @@
                 великана. На севере виднеется оживленная и днем и ночью площадь.
             </description>
             <exits>
-                <north>square</north>
+                <north>system-start</north>
             </exits>
         </room>
 
@@ -39,7 +39,7 @@
                 разнообразные товары всем имеющим набитый звонкими монетами кошелек.
             </description>
             <exits>
-                <east>square</east>
+                <east>system-start</east>
             </exits>
         </room>
 
@@ -51,7 +51,7 @@
                 в честь победы империи в одном из последних походов на варварские земли.
             </description>
             <exits>
-                <west>square</west>
+                <west>system-start</west>
             </exits>
         </room>
 
@@ -64,7 +64,7 @@
                 второй этаж.
             </description>
             <exits>
-                <south>square</south>
+                <south>system-start</south>
             </exits>
         </room>
     </rooms>
