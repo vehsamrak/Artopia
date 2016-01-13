@@ -32,7 +32,11 @@ abstract public class AbstractOpenCommand extends AbstractCommand
         return directionMap;
     }
 
-    public Exit getExit(String[] arguments, User user, ServiceLocator serviceLocator) throws ServiceNotFound, UndefinedDirection
+    public Exit getExit(
+            String[] arguments,
+            User user,
+            ServiceLocator serviceLocator
+    ) throws ServiceNotFound, UndefinedDirection
     {
         RoomRepository roomRepository = (RoomRepository) serviceLocator.get(Service.ROOM_REPOSITORY);
         Room currentRoom = roomRepository.findById(user.getRoomId());
