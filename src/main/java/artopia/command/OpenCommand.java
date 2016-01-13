@@ -31,7 +31,7 @@ public class OpenCommand extends AbstractOpenCommand
             return this.createCommandResultWithError(new ArgumentMissing("Что именно открыть?"));
         }
 
-        Exit exit = super.getExit(arguments, user, serviceLocator);
+        Exit exit = super.getExitByArguments(arguments, user, serviceLocator);
 
         if (exit == null || !exit.isClosed()) {
             return this.createCommandResultWithError(new OpenTargetNotFound());

@@ -32,7 +32,7 @@ abstract public class AbstractOpenCommand extends AbstractCommand
         return directionMap;
     }
 
-    public Exit getExit(
+    public Exit getExitByArguments(
             String[] arguments,
             User user,
             ServiceLocator serviceLocator

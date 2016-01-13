@@ -32,7 +32,7 @@ public class CloseCommand extends AbstractOpenCommand
             return this.createCommandResultWithError(new ArgumentMissing("Что именно закрыть?"));
         }
 
-        Exit exit = super.getExit(arguments, user, serviceLocator);
+        Exit exit = super.getExitByArguments(arguments, user, serviceLocator);
 
         if (exit == null) {
             return this.createCommandResultWithError(new CloseTargetNotFound());
