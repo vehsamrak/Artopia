@@ -6,6 +6,7 @@ package artopia.service.locator;
 public enum Service
 {
     COMMAND,
+    COMMAND_REPOSITORY,
     DATABASE,
     ROOM_REPOSITORY,
     USER,

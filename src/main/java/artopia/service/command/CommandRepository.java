@@ -13,6 +13,8 @@ import artopia.command.UpCommand;
 import artopia.command.WestCommand;
 import artopia.command.infrastructure.AbstractCommand;
 import artopia.command.CloseCommand;
+import artopia.service.locator.AbstractService;
+import artopia.service.locator.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * @author Vehsamrak
  */
-public class CommandRepository
+public class CommandRepository extends AbstractService
 {
     final private HashMap<AbstractCommand, String[]> commandList = new HashMap<>();
 
@@ -117,5 +119,11 @@ public class CommandRepository
         String[] secondAliasArray = secondCommand.getValue();
 
         return firstAliasArray[0].compareToIgnoreCase(secondAliasArray[0]);
+    }
+
+    @Override
+    public Service getName()
+    {
+        return Service.COMMAND_REPOSITORY;
     }
 }
