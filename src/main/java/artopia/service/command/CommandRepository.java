@@ -1,6 +1,7 @@
 package artopia.service.command;
 
 import artopia.command.AuthorsCommand;
+import artopia.command.CloseCommand;
 import artopia.command.DownCommand;
 import artopia.command.EastCommand;
 import artopia.command.HelpCommand;
@@ -12,11 +13,10 @@ import artopia.command.SouthCommand;
 import artopia.command.UpCommand;
 import artopia.command.WestCommand;
 import artopia.command.infrastructure.AbstractCommand;
-import artopia.command.CloseCommand;
 import artopia.service.locator.AbstractService;
 import artopia.service.locator.Service;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  */
 public class CommandRepository extends AbstractService
 {
-    final private HashMap<AbstractCommand, String[]> commandList = new HashMap<>();
+    final private Map<AbstractCommand, String[]> commandList = new LinkedHashMap<>();
 
     /**
      * Список всех игровых команд
@@ -34,16 +34,16 @@ public class CommandRepository extends AbstractService
      */
     public CommandRepository()
     {
-        this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
-        this.commandList.put(new QuitCommand(), new String[]{"quit", "конец", "выход"});
-        this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
-        this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
         this.commandList.put(new NorthCommand(), new String[]{"north", "север"});
-        this.commandList.put(new SouthCommand(), new String[]{"south", "юг"});
         this.commandList.put(new EastCommand(), new String[]{"east", "восток"});
+        this.commandList.put(new SouthCommand(), new String[]{"south", "юг"});
         this.commandList.put(new WestCommand(), new String[]{"west", "запад"});
         this.commandList.put(new UpCommand(), new String[]{"up", "вверх"});
-        this.commandList.put(new DownCommand(), new String[]{"down", "вниз"});
+        this.commandList.put(new DownCommand(), new String[]{"down", "вниз", "низ"});
+        this.commandList.put(new HelpCommand(), new String[]{"help", "помощь", "справка", "?"});
+        this.commandList.put(new QuitCommand(), new String[]{"quit", "конец", "выход"});
+        this.commandList.put(new AuthorsCommand(), new String[]{"authors", "credits", "авторы"});
+        this.commandList.put(new LookCommand(), new String[]{"look", "смотреть"});
         this.commandList.put(new OpenCommand(), new String[]{"open", "открыть"});
         this.commandList.put(new CloseCommand(), new String[]{"close", "закрыть"});
     }

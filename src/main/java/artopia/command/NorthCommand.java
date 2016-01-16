@@ -19,7 +19,8 @@ public class NorthCommand extends AbstractDirectionCommand
 
     @Override
     public CommandResult execute(
-            String[] arguments, User user,
+            String[] arguments,
+            User user,
             ServiceLocator serviceLocator
     ) throws Exception
     {
