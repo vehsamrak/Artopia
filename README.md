@@ -20,4 +20,4 @@ java -jar build/libs/artopia-*.jar
 
 Список классов особо нуждающихся в тестировании [доступен по этой ссылке](https://codecov.io/github/Vehsamrak/Artopia/features/suggestions?ref=master)
 
-![График изменения покрытия](https://codecov.io/github/Vehsamrak/Artopia/branch.svg?branch=master)
+![График изменения покрытия](https://codecov.io/github/Vehsamrak/Artopia/branch.svg?branch=master&limit=50)
