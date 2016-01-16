@@ -12,3 +12,10 @@ gradle build
 ```
 java -jar build/libs/artopia-*.jar
 ```
+
+### Тесты
+Покрытие: [![Code Coverage](https://codecov.io/github/Vehsamrak/Artopia/coverage.svg?branch=master)](https://codecov.io/github/vehsamrak/artopia?branch=master)
+
+[Список классов нуждающихся в тестировании](https://codecov.io/github/Vehsamrak/Artopia/features/suggestions?ref=master)
+
+![График изменения покрытия](https://codecov.io/github/Vehsamrak/Artopia/branch.svg?branch=master)
