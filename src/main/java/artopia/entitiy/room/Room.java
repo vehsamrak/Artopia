@@ -90,6 +90,10 @@ public class Room
     {
         Exit exit;
 
+        if (direction == null) {
+            throw new UndefinedDirection();
+        }
+
         if (direction.equals(Direction.NORTH)) {
             exit = this.getNorth();
         } else if (direction.equals(Direction.EAST)) {

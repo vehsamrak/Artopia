@@ -65,7 +65,7 @@ abstract public class AbstractOpenCommand extends AbstractCommand
 
     protected String getCyrillicDirectionString(Direction direction) throws UndefinedDirection
     {
-        String directionString;
+        String directionString = null;
 
         if (direction.equals(Direction.NORTH)) {
             directionString = "на север";
@@ -79,8 +79,6 @@ abstract public class AbstractOpenCommand extends AbstractCommand
             directionString = "наверх";
         } else if (direction.equals(Direction.DOWN)) {
             directionString = "вниз";
-        } else {
-            throw new UndefinedDirection();
         }
 
         return directionString;
