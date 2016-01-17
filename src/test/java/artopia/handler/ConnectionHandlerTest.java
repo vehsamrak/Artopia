@@ -1,17 +1,22 @@
 package artopia.handler;
 
+import artopia.entitiy.User;
 import artopia.exception.EmptyPassword;
 import artopia.exception.EmptyUsername;
 import artopia.exception.WrongPassword;
-import artopia.entitiy.User;
 import artopia.service.DatabaseService;
 import artopia.service.UserService;
+import artopia.service.command.CommandService;
+import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -19,11 +24,11 @@ import vehsamrak.helper.NullOutputStream;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.io.InputStream;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -56,13 +61,24 @@ public class ConnectionHandlerTest extends Assert
     }
 
     @Test
-    public void run_connectedUserEntersExitCommand_disconnectingUser() throws Exception
+    public void run_connectedUserEntersQuitCommand_disconnectingUser() throws Exception
     {
         BufferedReader socketInput = this.createSocketInput();
         PrintWriter socketOutput = this.createSocketOutput();
         User user = this.createUser();
-        ConnectionHandler connectionHandler = createConnectionHandler(socketInput, socketOutput, user);
-        when(socketInput.readLine()).thenReturn("exit");
+        ConnectionHandler connectionHandler = this.createConnectionHandler(socketInput, socketOutput, user);
+        when(socketInput.readLine()).then(new Answer() {
+            private int count = 0;
+
+            public Object answer(InvocationOnMock invocation) {
+                if (count == 3) {
+                    return "quit";
+                } else {
+                    count++;
+                    return "authors";
+                }
+            }
+        });
 
         connectionHandler.run();
     }
@@ -109,41 +125,56 @@ public class ConnectionHandlerTest extends Assert
         connectionHandler.run();
     }
 
+    private ConnectionHandler createConnectionHandler(BufferedReader socketInput, PrintWriter socketOutput, User user) throws Exception
+    {
+        UserService userService = this.createUserServiceWithUser(user);
+
+        return new ConnectionHandler(
+                this.createSocket(),
+                socketInput,
+                socketOutput,
+                this.createServiceLocatorWithUserService(userService)
+        );
+    }
+
     private ConnectionHandler createConnectionHandlerThrowsException(
             BufferedReader socketInput,
             PrintWriter socketOutput,
             Exception exception
     ) throws Exception
     {
+        UserService userService = this.createUserServiceThatThrowsException(exception);
         return new ConnectionHandler(
                 this.createSocket(),
                 socketInput,
                 socketOutput,
-                this.createServiceLocator()
+                this.createServiceLocatorWithUserService(userService)
         );
     }
 
-    private ServiceLocator createServiceLocator()
+    private ServiceLocator createServiceLocatorWithUserService(UserService userService) throws Exception
     {
-        return mock(ServiceLocator.class);
+        DatabaseService databaseService = this.createDatabaseService();
+
+        ServiceLocator serviceLocator = mock(ServiceLocator.class);
+        when(serviceLocator.get(Service.USER)).thenReturn(userService);
+        when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseService);
+
+        CommandService commandService = new CommandService(serviceLocator);
+        when(serviceLocator.get(Service.COMMAND)).thenReturn(commandService);
+
+        return serviceLocator;
     }
 
     private DatabaseService createDatabaseService()
     {
+        Session session = mock(Session.class);
+        when(session.beginTransaction()).thenReturn(mock(Transaction.class));
+
         DatabaseService databaseServiceMock = mock(DatabaseService.class);
-        when(databaseServiceMock.openSession()).thenReturn(mock(Session.class));
+        when(databaseServiceMock.openSession()).thenReturn(session);
 
         return databaseServiceMock;
-    }
-
-    private ConnectionHandler createConnectionHandler(BufferedReader socketInput, PrintWriter socketOutput, User user) throws Exception
-    {
-        return new ConnectionHandler(
-                this.createSocket(),
-                socketInput,
-                socketOutput,
-                this.createServiceLocator()
-        );
     }
 
     private PrintWriter createSocketOutput()
