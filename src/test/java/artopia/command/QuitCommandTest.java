@@ -25,10 +25,10 @@ public class QuitCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsResponseWithLeaveMessageAndExitSubcommand() throws ServiceNotFound
     {
-
+        User user = mock(User.class);
         String[] arguments = {};
         ServiceLocator serviceLocator = createServiceLocator();
-        CommandResult commandResult = new QuitCommand().execute(arguments, mock(User.class), serviceLocator);
+        CommandResult commandResult = new QuitCommand().execute(arguments, user, serviceLocator);
         ArrayList<String> subCommands = commandResult.getSubCommands();
 
         assertFalse(commandResult.haveErrors());
@@ -38,7 +38,8 @@ public class QuitCommandTest extends Assert
         assertEquals("exit", subCommands.get(0));
     }
 
-    private ServiceLocator createServiceLocator() throws ServiceNotFound{
+    private ServiceLocator createServiceLocator() throws ServiceNotFound
+    {
         Transaction transaction = mock(Transaction.class);
 
         Session session = mock(Session.class);
