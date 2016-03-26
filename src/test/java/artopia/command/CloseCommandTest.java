@@ -56,7 +56,7 @@ public class CloseCommandTest extends Assert {
     public void execute_givenArgumentNorthDirectionAndUserInRoomWithOpenedExits_returnsResultWithSuccess() throws Exception  {
         String[] arguments = new String[]{"north"};
         User user = this.createUser();
-        ServiceLocator serviceLocator = this.createServiceLocatorWithOpenedExits();
+        ServiceLocator serviceLocator = this.createLocatorWithRoomRepositoryWithRoomWithOpenedExits();
 
         CloseCommand closeCommand = new CloseCommand();
         CommandResult result = closeCommand.execute(arguments, user, serviceLocator);
@@ -87,7 +87,7 @@ public class CloseCommandTest extends Assert {
         return user;
     }
 
-    private ServiceLocator createServiceLocatorWithOpenedExits() throws Exception
+    private ServiceLocator createLocatorWithRoomRepositoryWithRoomWithOpenedExits() throws Exception
     {
         Room room = this.createRoomWithOpenedExits();
         RoomRepository roomRepository = createRoomRepository(room);
