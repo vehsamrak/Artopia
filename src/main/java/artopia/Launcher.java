@@ -15,12 +15,28 @@ import java.net.Socket;
  */
 public class Launcher
 {
-    public static void run()
+    private ServiceLocator serviceLocator;
+
+    /**
+     * @param serviceLocator ServiceLocator
+     * @return Launcher
+     */
+    public Launcher setServiceLocator(ServiceLocator serviceLocator)
     {
+        this.serviceLocator = serviceLocator;
+
+        return this;
+    }
+
+    public void run()
+    {
+        if (this.serviceLocator == null) {
+            throw new RuntimeException("ServiceLocator must be set to run application.");
+        }
+
         int port = 9000;
 
         System.out.println("Инициализация приложения ...");
-        ServiceLocator serviceLocator = new ServiceLocator();
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -37,7 +53,7 @@ public class Launcher
                         socket,
                         socketInput,
                         socketOutput,
-                        serviceLocator
+                        this.serviceLocator
                 );
 
                 new Thread(connectionHandler).start();
