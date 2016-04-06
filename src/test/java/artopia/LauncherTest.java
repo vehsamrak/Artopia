@@ -4,15 +4,20 @@ import artopia.exception.ServiceNotFound;
 import artopia.service.DatabaseService;
 import artopia.service.locator.Service;
 import artopia.service.locator.ServiceLocator;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.*;
+
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
