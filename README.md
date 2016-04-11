@@ -1,7 +1,10 @@
 # Artopia mud
 ### Mud - console multiplayer rpg
 
-[![Build Status](https://travis-ci.org/Vehsamrak/Artopia.svg?branch=master)](https://travis-ci.org/Vehsamrak/Artopia) [![Code Coverage](https://codecov.io/github/Vehsamrak/Artopia/coverage.svg?branch=master)](https://codecov.io/github/vehsamrak/artopia?branch=master)
+[![Build Status](https://travis-ci.org/Vehsamrak/Artopia.svg?branch=master)](https://travis-ci.org/Vehsamrak/Artopia) [![Code Coverage](https://codecov.io/github/Vehsamrak/Artopia/coverage.svg?branch=master)](https://codecov.io/github/vehsamrak/artopia?branch=master) <a href="https://scan.coverity.com/projects/vehsamrak-artopia">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/8485/badge.svg"/>
+</a>
 
 ### Сборка
 ```
