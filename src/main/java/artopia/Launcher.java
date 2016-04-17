@@ -17,21 +17,15 @@ public class Launcher
 {
     private ServiceLocator serviceLocator;
 
-    /**
-     * @param serviceLocator ServiceLocator
-     * @return Launcher
-     */
-    public Launcher setServiceLocator(ServiceLocator serviceLocator)
+    public Launcher(ServiceLocator serviceLocator)
     {
         this.serviceLocator = serviceLocator;
-
-        return this;
     }
 
     public void run()
     {
         if (this.serviceLocator == null) {
-            throw new RuntimeException("ServiceLocator must be set to run application.");
+            throw new RuntimeException("ServiceLocator must be injected to constructor to run application.");
         }
 
         int port = 9000;
