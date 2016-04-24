@@ -24,10 +24,6 @@ public class Launcher
 
     public void run()
     {
-        if (this.serviceLocator == null) {
-            throw new RuntimeException("ServiceLocator must be injected to constructor to run application.");
-        }
-
         int port = 9000;
 
         System.out.println("Инициализация приложения ...");

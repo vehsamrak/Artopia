@@ -25,6 +25,21 @@ public class QuitCommandTest extends Assert
     @Test
     public void execute_noParameters_returnsResponseWithLeaveMessageAndExitSubcommand() throws ServiceNotFound
     {
+        User user = mock(User.class);
+        String[] arguments = {};
+        ServiceLocator serviceLocator = createServiceLocator();
+        CommandResult commandResult = new QuitCommand().execute(arguments, user, serviceLocator);
+        ArrayList<String> subCommands = commandResult.getSubCommands();
+
+        assertFalse(commandResult.haveErrors());
+        assertEquals("До встречи!", commandResult.toString());
+        assertTrue(commandResult.haveSubCommands());
+        assertEquals(1, subCommands.size());
+        assertEquals("exit", subCommands.get(0));
+    }
+
+    private ServiceLocator createServiceLocator() throws ServiceNotFound
+    {
         Transaction transaction = mock(Transaction.class);
 
         Session session = mock(Session.class);
@@ -36,14 +51,6 @@ public class QuitCommandTest extends Assert
         ServiceLocator serviceLocator = mock(ServiceLocator.class);
         when(serviceLocator.get(Service.DATABASE)).thenReturn(databaseServiceMock);
 
-        String[] arguments = {};
-        CommandResult commandResult = new QuitCommand().execute(arguments, mock(User.class), serviceLocator);
-        ArrayList<String> subCommands = commandResult.getSubCommands();
-
-        assertFalse(commandResult.haveErrors());
-        assertEquals("До встречи!", commandResult.toString());
-        assertTrue(commandResult.haveSubCommands());
-        assertEquals(1, subCommands.size());
-        assertEquals("exit", subCommands.get(0));
+      return  serviceLocator;
     }
 }
