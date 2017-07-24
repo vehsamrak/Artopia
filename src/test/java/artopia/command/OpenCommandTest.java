@@ -130,6 +130,7 @@ public class OpenCommandTest extends Assert
         String RoomId = room.getId();
         RoomRepository roomRepository = mock(RoomRepository.class);
         when(roomRepository.findById(RoomId)).thenReturn(room);
+        
         return roomRepository;
     }
 
